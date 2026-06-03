@@ -239,7 +239,7 @@ export function TeamManagePage() {
 
   function handleSaveEdit(newName: string, newTrackId: number) {
     setLocalTeams(prev =>
-      prev.map(t => t.team_id === currentUser.team_id
+      prev.map(t => t.team_id === currentUser!.team_id
         ? { ...t, team_name: newName, track_id: newTrackId }
         : t
       )

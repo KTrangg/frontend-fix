@@ -7,6 +7,38 @@ import { users, teams, tracks } from "@/shared/mocks/mockData";
 
 const MOCK_PASSWORD = "password";
 
+function EyeToggle({ visible, onToggle }: { visible: boolean; onToggle: () => void }) {
+  const [hover, setHover] = useState(false);
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      style={{
+        position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)",
+        background: "none", border: "none", cursor: "pointer", padding: 4,
+        display: "flex", alignItems: "center",
+        color: hover ? C.text : C.textMuted,
+        transition: "color 0.15s",
+      }}
+    >
+      {visible ? (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+      ) : (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
+          <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
+          <line x1="1" y1="1" x2="23" y2="23" />
+        </svg>
+      )}
+    </button>
+  );
+}
+
 export function ProfilePage() {
   const { currentUser } = useAuth();
   const [tab, setTab] = useState("overview");
@@ -22,6 +54,11 @@ export function ProfilePage() {
   const [confirmPwd, setConfirmPwd] = useState("");
   const [pwdError, setPwdError] = useState<string | null>(null);
   const [pwdSuccess, setPwdSuccess] = useState(false);
+
+  // Show/hide toggles for each password field
+  const [showCurrentPwd, setShowCurrentPwd] = useState(false);
+  const [showNewPwd, setShowNewPwd] = useState(false);
+  const [showConfirmPwd, setShowConfirmPwd] = useState(false);
 
   if (!currentUser || !userRecord) return null;
 
@@ -152,15 +189,18 @@ export function ProfilePage() {
                 <label style={{ display: "block", color: C.greenMuted, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>
                   Current Password
                 </label>
-                <input
-                  type="password"
-                  value={currentPwd}
-                  onChange={(e) => { setCurrentPwd(e.target.value); setPwdError(null); setPwdSuccess(false); }}
-                  placeholder="••••••••"
-                  style={inputStyle}
-                  onFocus={onFocus}
-                  onBlur={onBlur}
-                />
+                <div style={{ position: "relative" }}>
+                  <input
+                    type={showCurrentPwd ? "text" : "password"}
+                    value={currentPwd}
+                    onChange={(e) => { setCurrentPwd(e.target.value); setPwdError(null); setPwdSuccess(false); }}
+                    placeholder="••••••••"
+                    style={{ ...inputStyle, paddingRight: 40 }}
+                    onFocus={onFocus}
+                    onBlur={onBlur}
+                  />
+                  <EyeToggle visible={showCurrentPwd} onToggle={() => setShowCurrentPwd((v) => !v)} />
+                </div>
               </div>
 
               <div style={{ height: 1, background: C.border }} />
@@ -170,33 +210,40 @@ export function ProfilePage() {
                   New Password
                   <span style={{ color: C.textMuted, marginLeft: 8, letterSpacing: "0.06em" }}>(min 8 chars)</span>
                 </label>
-                <input
-                  type="password"
-                  value={newPwd}
-                  onChange={(e) => { setNewPwd(e.target.value); setPwdError(null); setPwdSuccess(false); }}
-                  placeholder="••••••••"
-                  style={inputStyle}
-                  onFocus={onFocus}
-                  onBlur={onBlur}
-                />
+                <div style={{ position: "relative" }}>
+                  <input
+                    type={showNewPwd ? "text" : "password"}
+                    value={newPwd}
+                    onChange={(e) => { setNewPwd(e.target.value); setPwdError(null); setPwdSuccess(false); }}
+                    placeholder="••••••••"
+                    style={{ ...inputStyle, paddingRight: 40 }}
+                    onFocus={onFocus}
+                    onBlur={onBlur}
+                  />
+                  <EyeToggle visible={showNewPwd} onToggle={() => setShowNewPwd((v) => !v)} />
+                </div>
               </div>
 
               <div>
                 <label style={{ display: "block", color: C.greenMuted, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>
                   Confirm New Password
                 </label>
-                <input
-                  type="password"
-                  value={confirmPwd}
-                  onChange={(e) => { setConfirmPwd(e.target.value); setPwdError(null); setPwdSuccess(false); }}
-                  placeholder="••••••••"
-                  style={{
-                    ...inputStyle,
-                    borderColor: confirmPwd && newPwd && confirmPwd !== newPwd ? "rgba(239,68,68,0.6)" : "#2a2a3a",
-                  }}
-                  onFocus={onFocus}
-                  onBlur={onBlur}
-                />
+                <div style={{ position: "relative" }}>
+                  <input
+                    type={showConfirmPwd ? "text" : "password"}
+                    value={confirmPwd}
+                    onChange={(e) => { setConfirmPwd(e.target.value); setPwdError(null); setPwdSuccess(false); }}
+                    placeholder="••••••••"
+                    style={{
+                      ...inputStyle,
+                      paddingRight: 40,
+                      borderColor: confirmPwd && newPwd && confirmPwd !== newPwd ? "rgba(239,68,68,0.6)" : "#2a2a3a",
+                    }}
+                    onFocus={onFocus}
+                    onBlur={onBlur}
+                  />
+                  <EyeToggle visible={showConfirmPwd} onToggle={() => setShowConfirmPwd((v) => !v)} />
+                </div>
                 {confirmPwd && newPwd && confirmPwd !== newPwd && (
                   <div style={{ color: C.red, fontFamily: "'JetBrains Mono', monospace", fontSize: 10, marginTop: 6, letterSpacing: "0.04em" }}>
                     Passwords do not match

@@ -106,7 +106,7 @@ export function CoordJudgesPage() {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr auto", gap: 10, alignItems: "end" }}>
             <PixelInput label="Name" value={guestName} onChange={(e) => setGuestName(e.target.value)} />
             <PixelInput label="Email" type="email" value={guestEmail} onChange={(e) => setGuestEmail(e.target.value)} />
-            <PixelInput label="Temp Password" type="password" value={guestPwd} onChange={(e) => setGuestPwd(e.target.value)} />
+            <PixelInput label="Temp Password" type="password" value={guestPwd} onChange={(e) => setGuestPwd(e.target.value)} showToggle />
             <PixelButton variant="cyber" onClick={createGuest}>CREATE</PixelButton>
           </div>
         </PixelCard>

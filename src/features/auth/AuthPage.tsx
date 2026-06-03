@@ -223,6 +223,7 @@ export function AuthPage({ navigate }: AuthPageProps) {
               placeholder="••••••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              showToggle
             />
 
             {mode === "register" && (
@@ -233,6 +234,7 @@ export function AuthPage({ navigate }: AuthPageProps) {
                   placeholder="••••••••••••"
                   value={confirmPass}
                   onChange={(e) => setConfirmPass(e.target.value)}
+                  showToggle
                 />
 
                 {/* Role selector */}

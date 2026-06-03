@@ -286,10 +286,34 @@ interface PixelInputProps {
   prefix?: string;
   className?: string;
   disabled?: boolean;
+  showToggle?: boolean;
 }
 
-export function PixelInput({ label, placeholder, type = "text", value, onChange, prefix, className = "", disabled = false }: PixelInputProps) {
+function EyeOpen() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  );
+}
+
+function EyeClosed() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
+      <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
+      <line x1="1" y1="1" x2="23" y2="23" />
+    </svg>
+  );
+}
+
+export function PixelInput({ label, placeholder, type = "text", value, onChange, prefix, className = "", disabled = false, showToggle = false }: PixelInputProps) {
   const [focused, setFocused] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [hoverEye, setHoverEye] = useState(false);
+  const isPassword = type === "password";
+  const resolvedType = isPassword && showToggle ? (visible ? "text" : "password") : type;
   return (
     <div className={`flex flex-col gap-1.5 ${className}`}>
       {label && (
@@ -306,18 +330,36 @@ export function PixelInput({ label, placeholder, type = "text", value, onChange,
           borderRadius: 0,
           boxShadow: focused ? `0 0 12px rgba(34,197,94,0.15), 0 0 20px rgba(59,130,246,0.08)` : "none",
           transition: "all 0.15s ease",
+          position: "relative",
         }}
       >
-        
         <input
-          type={type} value={value} onChange={onChange} placeholder={placeholder} disabled={disabled}
+          type={resolvedType} value={value} onChange={onChange} placeholder={placeholder} disabled={disabled}
           onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
           style={{
             background: "transparent", border: "none", outline: "none",
             color: C.text, fontFamily: "'JetBrains Mono', monospace", fontSize: 14,
             padding: prefix ? "10px 12px 10px 0" : "10px 12px", width: "100%", caretColor: C.green,
+            paddingRight: isPassword && showToggle ? 40 : undefined,
           }}
         />
+        {isPassword && showToggle && (
+          <button
+            type="button"
+            onClick={() => setVisible((v) => !v)}
+            onMouseEnter={() => setHoverEye(true)}
+            onMouseLeave={() => setHoverEye(false)}
+            style={{
+              position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)",
+              background: "none", border: "none", cursor: "pointer", padding: 4,
+              display: "flex", alignItems: "center",
+              color: hoverEye ? C.text : C.textMuted,
+              transition: "color 0.15s",
+            }}
+          >
+            {visible ? <EyeOpen /> : <EyeClosed />}
+          </button>
+        )}
       </div>
     </div>
   );

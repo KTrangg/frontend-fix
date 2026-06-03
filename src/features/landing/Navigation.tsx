@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from './ui/button';
+import { Button } from '@/shared/components/ui/button';
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

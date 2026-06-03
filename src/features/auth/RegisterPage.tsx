@@ -62,8 +62,8 @@ export function RegisterPage() {
             <PixelInput label="Email" type="email" placeholder="you@seal.edu" value={email} onChange={(e) => setEmail(e.target.value)} />
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-              <PixelInput label="Password" type="password" placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} />
-              <PixelInput label="Confirm Password" type="password" placeholder="••••••••" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+              <PixelInput label="Password" type="password" placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} showToggle />
+              <PixelInput label="Confirm Password" type="password" placeholder="••••••••" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} showToggle />
             </div>
 
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>

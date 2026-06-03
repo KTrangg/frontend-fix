@@ -34,7 +34,7 @@ export function TeamViewPage() {
     );
   }
 
-  const team = teams.find(t => t.team_id === currentUser.team_id);
+  const team = teams.find(t => t.team_id === currentUser.team_id)!;
   if (!team) return null;
 
   const track = tracks.find(tr => tr.track_id === team.track_id);
@@ -84,7 +84,7 @@ export function TeamViewPage() {
     if (!transferTarget) return;
     setMembers(prev => prev.map(m => {
       if (m.team_id !== team.team_id) return m;
-      if (m.user_id === currentUser.user_id) return { ...m, is_leader: false };
+      if (m.user_id === currentUser!.user_id) return { ...m, is_leader: false };
       if (m.user_id === transferTarget.user_id) return { ...m, is_leader: true };
       return m;
     }));
