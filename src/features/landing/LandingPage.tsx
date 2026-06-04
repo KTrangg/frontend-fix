@@ -15,17 +15,18 @@ import G3 from "@/imports/Hackathon3.jpg";
 import G4 from "@/imports/Hackathon4.jpg";
 import G5 from "@/imports/Hackathon5.jpg";
 import G6 from "@/imports/Hackathon6.jpg";
+import G7 from "@/imports/Hackathon7.jpg";
 
 type Page = "landing" | "auth" | "register" | "dashboard" | "events" | "teams" | "submissions" | "leaderboard" | "judge" | "admin" | "profile";
 
 const sponsors = [
   { name: "TechCorp", tier: "platinum" },
-  { name: "DevHub",   tier: "platinum" },
-  { name: "CodeLab",  tier: "gold" },
+  { name: "DevHub", tier: "platinum" },
+  { name: "CodeLab", tier: "gold" },
   { name: "ByteWave", tier: "gold" },
-  { name: "SyncIO",   tier: "silver" },
-  { name: "NullPtr",  tier: "silver" },
-  { name: "OpenSrc",  tier: "silver" },
+  { name: "SyncIO", tier: "silver" },
+  { name: "NullPtr", tier: "silver" },
+  { name: "OpenSrc", tier: "silver" },
 ];
 
 const ongoingEvents = [
@@ -74,12 +75,12 @@ const upcomingEvents = [
 ];
 
 const faqs = [
-  { q: "Who can participate?",       a: "Any student or developer 18+. Teams of 1–4 members. Students, professionals, and hobbyists are all welcome." },
-  { q: "Is it free to join?",        a: "Yes — participation is completely free. All you need is a registered account on this platform." },
-  { q: "What can I build?",          a: "Web apps, mobile apps, AI tools, dev tools, games — anything built from scratch during the hackathon window." },
-  { q: "How are projects judged?",   a: "Innovation, technical depth, design quality, and real-world impact — scored by a panel of expert judges per round." },
-  { q: "What are the prizes?",       a: "Cash prizes, cloud credits, hardware, mentorship sessions, and fast-track interviews at sponsor companies." },
-  { q: "Can I use existing code?",   a: "Open-source libraries and frameworks are fine. The core project must be built during the event." },
+  { q: "Who can participate?", a: "Any student or developer 18+. Teams of 1–4 members. Students, professionals, and hobbyists are all welcome." },
+  { q: "Is it free to join?", a: "Yes — participation is completely free. All you need is a registered account on this platform." },
+  { q: "What can I build?", a: "Web apps, mobile apps, AI tools, dev tools, games — anything built from scratch during the hackathon window." },
+  { q: "How are projects judged?", a: "Innovation, technical depth, design quality, and real-world impact — scored by a panel of expert judges per round." },
+  { q: "What are the prizes?", a: "Cash prizes, cloud credits, hardware, mentorship sessions, and fast-track interviews at sponsor companies." },
+  { q: "Can I use existing code?", a: "Open-source libraries and frameworks are fine. The core project must be built during the event." },
 ];
 
 const features = [
@@ -116,12 +117,12 @@ const features = [
 ];
 
 const NAV_LINKS = [
-  { label: "Home",     href: "#hero" },
-  { label: "Events",   href: "#events" },
+  { label: "Home", href: "#hero" },
+  { label: "Events", href: "#events" },
   { label: "Timeline", href: "#timeline" },
-  { label: "Gallery",  href: "#gallery" },
-  { label: "About",    href: "#features" },
-  { label: "FAQ",      href: "#faq" },
+  { label: "Gallery", href: "#gallery" },
+  { label: "About", href: "#features" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 function ImagePlaceholder({ label, dataPlaceholder, width, height, src = "" }: {
@@ -268,9 +269,9 @@ function HeroSection({ navigate }: { navigate: (p: Page) => void }) {
       className="cyber-grid-bg"
     >
       <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0 }}>
-        <div style={{ position: "absolute", top: "10%", left: "5%",  width: 480, height: 480, borderRadius: "50%", background: "radial-gradient(circle, rgba(34,197,94,0.07) 0%, transparent 70%)" }} />
+        <div style={{ position: "absolute", top: "10%", left: "5%", width: 480, height: 480, borderRadius: "50%", background: "radial-gradient(circle, rgba(34,197,94,0.07) 0%, transparent 70%)" }} />
         <div style={{ position: "absolute", top: "20%", right: "8%", width: 400, height: 400, borderRadius: "50%", background: "radial-gradient(circle, rgba(59,130,246,0.07) 0%, transparent 70%)" }} />
-        <div style={{ position: "absolute", bottom: "5%", left: "40%",width: 320, height: 320, borderRadius: "50%", background: "radial-gradient(circle, rgba(6,182,212,0.05) 0%, transparent 70%)" }} />
+        <div style={{ position: "absolute", bottom: "5%", left: "40%", width: 320, height: 320, borderRadius: "50%", background: "radial-gradient(circle, rgba(6,182,212,0.05) 0%, transparent 70%)" }} />
       </div>
 
       <div style={{ position: "absolute", inset: 0, background: "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.03) 3px, rgba(0,0,0,0.03) 4px)", pointerEvents: "none", zIndex: 1 }} />
@@ -323,10 +324,10 @@ function HeroSection({ navigate }: { navigate: (p: Page) => void }) {
 
           <div style={{ display: "flex", gap: 28, flexWrap: "wrap", marginTop: 4 }}>
             {[
-              { v: "2,400+", l: "Hackers",  c: C.green },
-              { v: "320+",   l: "Teams",    c: C.blue  },
-              { v: "$50K",   l: "Prizes",   c: C.cyan  },
-              { v: "48h",    l: "Sprint",   c: C.green },
+              { v: "2,400+", l: "Hackers", c: C.green },
+              { v: "320+", l: "Teams", c: C.blue },
+              { v: "$50K", l: "Prizes", c: C.cyan },
+              { v: "48h", l: "Sprint", c: C.green },
             ].map((s) => (
               <div key={s.l} style={{ fontFamily: "'JetBrains Mono', monospace" }}>
                 <div style={{ color: s.c, fontSize: 22, fontWeight: 800, textShadow: `0 0 14px ${s.c}` }}>{s.v}</div>
@@ -339,7 +340,7 @@ function HeroSection({ navigate }: { navigate: (p: Page) => void }) {
         <div className="hidden md:flex flex-col gap-4 relative">
           <CircuitLines className="absolute -top-8 -right-8 w-full max-w-sm" />
 
-          <ImagePlaceholder label="[ HERO BANNER IMAGE ]" dataPlaceholder="hero-banner" height={220} src={Hero}/>
+          <ImagePlaceholder label="[ HERO BANNER IMAGE ]" dataPlaceholder="hero-banner" height={220} src={Hero} />
 
           <TerminalWindow title="seal-hms — live-dashboard" className="pixel-float-slow relative z-10">
             <div style={{ display: "flex", flexDirection: "column", gap: 7, fontSize: 12, color: C.text }}>
@@ -369,10 +370,10 @@ function HeroSection({ navigate }: { navigate: (p: Page) => void }) {
 
           <div className="grid grid-cols-2 gap-3">
             {[
-              { label: "Uptime",       value: "99.97%",  color: C.green  },
-              { label: "Active Teams", value: "120",     color: C.blue   },
-              { label: "Submissions",  value: "98",      color: C.cyan   },
-              { label: "Avg Score",    value: "88.4",    color: C.purple },
+              { label: "Uptime", value: "99.97%", color: C.green },
+              { label: "Active Teams", value: "120", color: C.blue },
+              { label: "Submissions", value: "98", color: C.cyan },
+              { label: "Avg Score", value: "88.4", color: C.purple },
             ].map((m) => (
               <div
                 key={m.label}
@@ -485,7 +486,7 @@ function EventsSection() {
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg, ${statusColors[ev.status]}, transparent)` }} />
                   <div style={{ position: "absolute", top: 0, left: 0, width: 10, height: 10, borderTop: `2px solid ${statusColors[ev.status]}`, borderLeft: `2px solid ${statusColors[ev.status]}` }} />
                   <div style={{ marginBottom: 16 }}>
-                    <ImagePlaceholder label="[ EVENT BANNER IMAGE ]" dataPlaceholder={`event-banner-${ev.name.toLowerCase().replace(/\s+/g, '-')}`} height={120} src="https://chiikawa-merch.com/cdn/shop/articles/Chiikawa_cute_photo.jpg?v=1745683306&width=1100" />
+                    <ImagePlaceholder label="[ EVENT BANNER IMAGE ]" dataPlaceholder={`event-banner-${ev.name.toLowerCase().replace(/\s+/g, '-')}`} height={120} src={G7} />
                   </div>
                   <div className="flex items-start justify-between gap-4 mb-3">
                     <div style={{ color: C.text, fontFamily: "'JetBrains Mono', monospace", fontSize: 15, fontWeight: 700 }}>{ev.name}</div>
@@ -624,16 +625,16 @@ function TimelineSection() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 0 }}>
               {timelineMilestones.map((m, i) => {
                 const isCompleted = m.status === "completed";
-                const isActive    = m.status === "active";
-                const isUpcoming  = m.status === "upcoming";
+                const isActive = m.status === "active";
+                const isUpcoming = m.status === "upcoming";
 
-                const nodeColor   = isCompleted ? "#22c55e" : isActive ? neon : "rgba(255,255,255,0.15)";
-                const nodeBorder  = isCompleted ? "#22c55e" : isActive ? neon : "rgba(255,255,255,0.18)";
-                const nodeBg      = isCompleted ? "rgba(34,197,94,0.15)" : isActive ? "rgba(0,255,136,0.12)" : "#111";
-                const nodeShadow  = isActive ? neonGlow : isCompleted ? "0 0 8px rgba(34,197,94,0.4)" : "none";
-                const labelColor  = isCompleted ? "#4ade80" : isActive ? neon : "rgba(255,255,255,0.35)";
-                const dateColor   = isCompleted ? "rgba(74,222,128,0.5)" : isActive ? "rgba(0,255,136,0.6)" : "rgba(255,255,255,0.2)";
-                const descColor   = isCompleted ? "rgba(255,255,255,0.45)" : isActive ? "rgba(255,255,255,0.6)" : "rgba(255,255,255,0.2)";
+                const nodeColor = isCompleted ? "#22c55e" : isActive ? neon : "rgba(255,255,255,0.15)";
+                const nodeBorder = isCompleted ? "#22c55e" : isActive ? neon : "rgba(255,255,255,0.18)";
+                const nodeBg = isCompleted ? "rgba(34,197,94,0.15)" : isActive ? "rgba(0,255,136,0.12)" : "#111";
+                const nodeShadow = isActive ? neonGlow : isCompleted ? "0 0 8px rgba(34,197,94,0.4)" : "none";
+                const labelColor = isCompleted ? "#4ade80" : isActive ? neon : "rgba(255,255,255,0.35)";
+                const dateColor = isCompleted ? "rgba(74,222,128,0.5)" : isActive ? "rgba(0,255,136,0.6)" : "rgba(255,255,255,0.2)";
+                const descColor = isCompleted ? "rgba(255,255,255,0.45)" : isActive ? "rgba(255,255,255,0.6)" : "rgba(255,255,255,0.2)";
 
                 return (
                   <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", position: "relative", zIndex: 2, padding: "0 4px" }}>
@@ -694,14 +695,14 @@ function TimelineSection() {
           <div style={{ display: "flex", flexDirection: "column", gap: 36 }}>
             {timelineMilestones.map((m, i) => {
               const isCompleted = m.status === "completed";
-              const isActive    = m.status === "active";
+              const isActive = m.status === "active";
 
-              const nodeColor  = isCompleted ? "#22c55e" : isActive ? neon : "rgba(255,255,255,0.15)";
-              const nodeBg     = isCompleted ? "rgba(34,197,94,0.15)" : isActive ? "rgba(0,255,136,0.12)" : "#111";
+              const nodeColor = isCompleted ? "#22c55e" : isActive ? neon : "rgba(255,255,255,0.15)";
+              const nodeBg = isCompleted ? "rgba(34,197,94,0.15)" : isActive ? "rgba(0,255,136,0.12)" : "#111";
               const nodeShadow = isActive ? neonGlow : isCompleted ? "0 0 8px rgba(34,197,94,0.4)" : "none";
               const labelColor = isCompleted ? "#4ade80" : isActive ? neon : "rgba(255,255,255,0.35)";
-              const dateColor  = isCompleted ? "rgba(74,222,128,0.5)" : isActive ? "rgba(0,255,136,0.6)" : "rgba(255,255,255,0.2)";
-              const descColor  = isCompleted ? "rgba(255,255,255,0.45)" : isActive ? "rgba(255,255,255,0.6)" : "rgba(255,255,255,0.2)";
+              const dateColor = isCompleted ? "rgba(74,222,128,0.5)" : isActive ? "rgba(0,255,136,0.6)" : "rgba(255,255,255,0.2)";
+              const descColor = isCompleted ? "rgba(255,255,255,0.45)" : isActive ? "rgba(255,255,255,0.6)" : "rgba(255,255,255,0.2)";
 
               return (
                 <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 20, position: "relative", zIndex: 1 }}>
@@ -821,24 +822,32 @@ function GalleryPhoto({ src, idx, gridColumn, gridRow, borderColor = C.green, ho
       </div>
 
       {/* Corner brackets */}
-      <div style={{ position: "absolute", top: 7, left: 7, width: 16, height: 16, zIndex: 5,
+      <div style={{
+        position: "absolute", top: 7, left: 7, width: 16, height: 16, zIndex: 5,
         borderTop: `2px solid ${hovered ? borderColor : `${borderColor}44`}`,
         borderLeft: `2px solid ${hovered ? borderColor : `${borderColor}44`}`,
         boxShadow: hovered ? `inset 2px 2px 6px ${borderColor}33` : "none",
-        transition: "border-color 0.3s, box-shadow 0.3s" }} />
-      <div style={{ position: "absolute", top: 7, right: 7, width: 16, height: 16, zIndex: 5,
+        transition: "border-color 0.3s, box-shadow 0.3s"
+      }} />
+      <div style={{
+        position: "absolute", top: 7, right: 7, width: 16, height: 16, zIndex: 5,
         borderTop: `2px solid ${hovered ? borderColor : `${borderColor}44`}`,
         borderRight: `2px solid ${hovered ? borderColor : `${borderColor}44`}`,
-        transition: "border-color 0.3s" }} />
-      <div style={{ position: "absolute", bottom: 7, left: 7, width: 16, height: 16, zIndex: 5,
+        transition: "border-color 0.3s"
+      }} />
+      <div style={{
+        position: "absolute", bottom: 7, left: 7, width: 16, height: 16, zIndex: 5,
         borderBottom: `2px solid ${hovered ? borderColor : `${borderColor}44`}`,
         borderLeft: `2px solid ${hovered ? borderColor : `${borderColor}44`}`,
-        transition: "border-color 0.3s" }} />
-      <div style={{ position: "absolute", bottom: 7, right: 7, width: 16, height: 16, zIndex: 5,
+        transition: "border-color 0.3s"
+      }} />
+      <div style={{
+        position: "absolute", bottom: 7, right: 7, width: 16, height: 16, zIndex: 5,
         borderBottom: `2px solid ${hovered ? borderColor : `${borderColor}44`}`,
         borderRight: `2px solid ${hovered ? borderColor : `${borderColor}44`}`,
         boxShadow: hovered ? `inset -2px -2px 6px ${borderColor}33` : "none",
-        transition: "border-color 0.3s, box-shadow 0.3s" }} />
+        transition: "border-color 0.3s, box-shadow 0.3s"
+      }} />
     </div>
   );
 }
@@ -852,9 +861,9 @@ function GallerySection() {
     if (activeIdx === null) { document.body.style.overflow = ""; return; }
     document.body.style.overflow = "hidden";
     function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape")      setActiveIdx(null);
-      if (e.key === "ArrowRight")  setActiveIdx(i => i !== null ? (i + 1) % n : null);
-      if (e.key === "ArrowLeft")   setActiveIdx(i => i !== null ? (i + n - 1) % n : null);
+      if (e.key === "Escape") setActiveIdx(null);
+      if (e.key === "ArrowRight") setActiveIdx(i => i !== null ? (i + 1) % n : null);
+      if (e.key === "ArrowLeft") setActiveIdx(i => i !== null ? (i + n - 1) % n : null);
     }
     document.addEventListener("keydown", onKey);
     return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
@@ -893,7 +902,7 @@ function GallerySection() {
   return (
     <section id="gallery" style={{ background: "#060a10", padding: "100px 0", borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}`, position: "relative", overflow: "hidden" }}>
       {/* Ambient glow blobs */}
-      <div style={{ position: "absolute", top: "8%",  left: "3%",  width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(34,197,94,0.05) 0%, transparent 70%)", pointerEvents: "none" }} />
+      <div style={{ position: "absolute", top: "8%", left: "3%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(34,197,94,0.05) 0%, transparent 70%)", pointerEvents: "none" }} />
       <div style={{ position: "absolute", bottom: "5%", right: "5%", width: 420, height: 420, borderRadius: "50%", background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
       <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: 600, height: 300, background: "radial-gradient(ellipse, rgba(6,182,212,0.03) 0%, transparent 70%)", pointerEvents: "none" }} />
 
@@ -913,11 +922,11 @@ function GallerySection() {
           boxShadow: "0 0 80px rgba(34,197,94,0.04), 0 0 40px rgba(59,130,246,0.04)",
         }}>
           <GalleryPhoto {...GALLERY[0]} gridColumn="1 / 3" gridRow="1 / 3" {...h(0)} />
-          <GalleryPhoto {...GALLERY[1]} gridColumn="3"     gridRow="1"     {...h(1)} />
-          <GalleryPhoto {...GALLERY[2]} gridColumn="3"     gridRow="2"     {...h(2)} />
-          <GalleryPhoto {...GALLERY[3]} gridColumn="1"     gridRow="3"     {...h(3)} />
-          <GalleryPhoto {...GALLERY[4]} gridColumn="2"     gridRow="3"     {...h(4)} />
-          <GalleryPhoto {...GALLERY[5]} gridColumn="3"     gridRow="3"     {...h(5)} />
+          <GalleryPhoto {...GALLERY[1]} gridColumn="3" gridRow="1"     {...h(1)} />
+          <GalleryPhoto {...GALLERY[2]} gridColumn="3" gridRow="2"     {...h(2)} />
+          <GalleryPhoto {...GALLERY[3]} gridColumn="1" gridRow="3"     {...h(3)} />
+          <GalleryPhoto {...GALLERY[4]} gridColumn="2" gridRow="3"     {...h(4)} />
+          <GalleryPhoto {...GALLERY[5]} gridColumn="3" gridRow="3"     {...h(5)} />
         </div>
       </div>
 
@@ -1043,12 +1052,7 @@ function SponsorsSection() {
                 {isPlatinum && (
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: C.gradientPrimary, opacity: 0.5 }} />
                 )}
-                <ImagePlaceholder
-                  label="[ SPONSOR LOGO ]"
-                  dataPlaceholder={`sponsor-logo-${s.name.toLowerCase()}`}
-                  width={isPlatinum ? 160 : s.tier === "gold" ? 130 : 110}
-                  height={isPlatinum ? 60 : s.tier === "gold" ? 50 : 44}
-                />
+                {s.name}
               </div>
             );
           })}
@@ -1108,12 +1112,12 @@ function FAQSection() {
 
 function InnovationStrip() {
   const items = [
-    { label: "Blockchain Verified",   color: C.blue   },
-    { label: "Real-Time Analytics",   color: C.green  },
-    { label: "Multi-Cloud Ready",     color: C.cyan   },
-    { label: "Zero-Trust Security",   color: C.blue   },
-    { label: "Live Sync Engine",      color: C.cyan   },
-    { label: "DevOps Native",         color: C.green  },
+    { label: "Blockchain Verified", color: C.blue },
+    { label: "Real-Time Analytics", color: C.green },
+    { label: "Multi-Cloud Ready", color: C.cyan },
+    { label: "Zero-Trust Security", color: C.blue },
+    { label: "Live Sync Engine", color: C.cyan },
+    { label: "DevOps Native", color: C.green },
   ];
 
   return (
@@ -1151,9 +1155,6 @@ function CTASection({ navigate }: { navigate: (p: Page) => void }) {
       <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: 600, height: 300, background: "radial-gradient(ellipse, rgba(34,197,94,0.06) 0%, rgba(59,130,246,0.04) 50%, transparent 70%)", pointerEvents: "none" }} />
 
       <div style={{ position: "relative", zIndex: 1, maxWidth: 580, margin: "0 auto" }}>
-        <div style={{ display: "flex", justifyContent: "center", marginBottom: 32 }}>
-          <ImagePlaceholder label="[ CTA FEATURE IMAGE ]" dataPlaceholder="cta-feature" width={280} height={280} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVtWbafXpkylw3PYWF2l7sPfJqqSdAgP1FhQ&s" />
-        </div>
         <h2 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "clamp(28px,4vw,52px)", fontWeight: 900, lineHeight: 1.15, marginBottom: 20, color: "white" }}>Boot Up Your<br /><GradientText from={C.green} to={C.blue}>Hackathon Journey</GradientText></h2>
         <p style={{ color: C.textMuted, fontFamily: "'JetBrains Mono', monospace", fontSize: 15, lineHeight: 1.8, marginBottom: 36 }}>
           Join thousands of builders on the platform. Your next breakthrough starts with a single commit.
