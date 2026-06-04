@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Mail } from "lucide-react";
 import {
   C,
   GradientText,
@@ -9,7 +9,10 @@ import {
 } from "@/shared/components/PixelComponents";
 import { SealFooter } from "@/shared/components/SealFooter";
 import sealLogo from "@/imports/image.png";
-import KhanhNHL from "@/imports/KhannhNLH.jpg"
+import KhanhNHL from "@/imports/KhannhNLH.jpg";
+import NhatNHM from "@/imports/NhatNHM.jpg";
+import TrangNHK from "@/imports/TrangNHK.jpg";
+import DaoNH from "@/imports/DaoHN.jpg";
 
 const mono = "'JetBrains Mono', monospace";
 
@@ -17,26 +20,26 @@ const team = [
   {
     name: "Nguyễn Huỳnh Minh Nhật",
     role: "Lead Engineer & Architect",
-    photo: "", // ← CHÈN ẢNH TẠI ĐÂY — VD: "/src/imports/nhat.jpg"
+    photo: NhatNHM, // ← CHÈN ẢNH TẠI ĐÂY — VD: "/src/imports/nhat.jpg"
     desc: "Designs the platform's role-based access model, scoring engine, and judge workflows. Loves clean APIs and merciless code reviews.",
     accent: C.green,
-    socials: { github: "#", linkedin: "#", email: "alex@sealhackathon.com" },
+    socials: { github: "https://github.com/nhatnhm1405", email: "https://mail.google.com/mail/?view=cm&to=nghminhnhat2006@gmail.com" },
   },
   {
     name: "Nguyễn Huỳnh Khánh Trang",
     role: "Frontend & UI/UX",
-    photo: "", // ← CHÈN ẢNH TẠI ĐÂY — VD: "/src/imports/khanh.jpg"
+    photo: TrangNHK, // ← CHÈN ẢNH TẠI ĐÂY — VD: "/src/imports/khanh.jpg"
     desc: "Owns the cyberpunk visual language and pixel-art component library. Pushes pixels until they glow exactly right.",
     accent: C.blue,
-    socials: { github: "#", linkedin: "#", email: "maya@sealhackathon.com" },
+    socials: { github: "https://github.com/KTrangg", email: "https://mail.google.com/mail/?view=cm&to=erutrang2004@gmail.com" },
   },
   {
     name: "Đào Hoàng Nhật",
     role: "Backend & DevOps",
-    photo: "", // ← CHÈN ẢNH TẠI ĐÂY — VD: "/src/imports/hoang.jpg"
+    photo: DaoNH, // ← CHÈN ẢNH TẠI ĐÂY — VD: "/src/imports/hoang.jpg"
     desc: "Keeps the leaderboard live, the submissions stamped, and the deploys boring. Believes in zero-downtime everything.",
     accent: C.cyan,
-    socials: { github: "#", linkedin: "#", email: "jordan@sealhackathon.com" },
+    socials: { github: "https://github.com/hoangnhat1407", email: "https://mail.google.com/mail/?view=cm&to=daonhat082@gmail.com" },
   },
   {
     name: "Nguyễn Lê Hữu Khánh",
@@ -44,7 +47,7 @@ const team = [
     photo: KhanhNHL, // ← CHÈN ẢNH TẠI ĐÂY — VD: "/src/imports/trang.jpg"
     desc: "Owns the cyberpunk visual language and pixel-art component library. Pushes pixels until they glow exactly right.",
     accent: C.purple,
-    socials: { github: "#", linkedin: "#", email: "sam@sealhackathon.com" },
+    socials: { github: "https://github.com/HuuKhanh2608", email: "https://mail.google.com/mail/?view=cm&to=nguyenlekhanh@gmail.com" },
   },
 ];
 
@@ -201,9 +204,8 @@ export function TeamPage() {
                   {/* Socials */}
                   <div style={{ display: "flex", gap: 8 }}>
                     {[
-                      { icon: Github,   href: m.socials.github,            label: "GitHub" },
-                      { icon: Linkedin, href: m.socials.linkedin,          label: "LinkedIn" },
-                      { icon: Mail,     href: `mailto:${m.socials.email}`, label: "Email" },
+                      { icon: Github, href: m.socials.github, label: "GitHub" },
+                      { icon: Mail,   href: m.socials.email,  label: "Email" },
                     ].map(({ icon: Icon, href, label }) => (
                       <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
                         style={{ width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center", border: `1px solid ${C.border}`, color: C.textMuted, transition: "all 0.15s" }}
