@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { useAuth } from "@/app/providers/AuthProvider";
 import {
   C, GradientText, PixelCard, PixelButton, PixelBadge, PixelInput,
@@ -213,7 +213,7 @@ export function TeamViewPage() {
         <div style={{ overflowX: "auto" }}>
           <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "'JetBrains Mono', monospace" }}>
             <thead>
-              <tr style={{ background: "linear-gradient(90deg, #0d1117, #0a1020)", borderBottom: `1px solid ${C.border}` }}>
+              <tr style={{ background: C.surface2, borderBottom: `1px solid ${C.border}` }}>
                 {["Full Name", "Student Type", "Student ID", "Role", "Joined", ...(isLeader ? ["Actions"] : [])].map(h => (
                   <th key={h} style={{ color: C.green, fontSize: 10, letterSpacing: "0.12em", textAlign: "left", padding: "11px 14px", fontWeight: 600, textTransform: "uppercase" }}>
                     {h}
@@ -227,7 +227,7 @@ export function TeamViewPage() {
                 if (!u) return null;
                 const isSelf = m.user_id === currentUser.user_id;
                 return (
-                  <tr key={m.user_id} style={{ borderBottom: `1px solid rgba(34,197,94,0.06)`, background: i % 2 === 0 ? C.surface : "rgba(10,12,15,0.5)" }}>
+                  <tr key={m.user_id} style={{ borderBottom: `1px solid rgba(34,197,94,0.06)`, background: i % 2 === 0 ? C.surface : C.surface2 }}>
                     <td style={{ padding: "11px 14px" }}>
                       <span style={{ color: C.text, fontFamily: "'JetBrains Mono', monospace", fontSize: 13, fontWeight: m.is_leader ? 700 : 400 }}>{u.full_name}</span>
                       {isSelf && <span style={{ color: C.textMuted, fontFamily: "'JetBrains Mono', monospace", fontSize: 10, marginLeft: 6 }}>(you)</span>}

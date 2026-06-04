@@ -38,25 +38,25 @@ html.theme-transitioning *::after {
 }
 
 :root[data-theme="light"] {
-  /* Backgrounds */
-  --c-bg:           #f8fafc;
+  /* Backgrounds — subtle sage-mint tint giữ nhận diện xanh lá */
+  --c-bg:           #f3faf5;
   --c-surface:      #ffffff;
-  --c-surface2:     #f1f5f9;
-  --c-surface3:     #e2e8f0;
+  --c-surface2:     #eaf4ed;
+  --c-surface3:     #d3e9d8;
 
-  /* Text */
-  --c-text:         #0f172a;
-  --c-text-muted:   #475569;
-  --c-text-dim:     #64748b;
-  --c-text-blue:    #2563eb;
+  /* Text — dark forest green thay cho slate xám vô hồn */
+  --c-text:         #0b1f11;
+  --c-text-muted:   #276244;
+  --c-text-dim:     #4b8a68;
+  --c-text-blue:    #1d4ed8;
 
-  /* Borders — subtle dark, not neon green */
-  --c-border:       rgba(15,23,42,0.1);
+  /* Borders — viền xanh lá nhẹ, không phải xám */
+  --c-border:       rgba(22,101,52,0.18);
   --c-border-bright:#16a34a;
-  --c-border-blue:  rgba(37,99,235,0.18);
+  --c-border-blue:  rgba(29,78,216,0.15);
 
   /* Nav/Footer */
-  --c-navbar-bg:    rgba(255,255,255,0.97);
-  --c-footer-bg:    #f1f5f9;
-  --c-copyright:    rgba(71,85,105,0.55);
+  --c-navbar-bg:    rgba(243,250,245,0.97);
+  --c-footer-bg:    #eaf4ed;
+  --c-copyright:    rgba(39,98,68,0.6);
 }

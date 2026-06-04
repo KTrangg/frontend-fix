@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import {
   C, GradientText, PixelCard, PixelButton, PixelBadge, PixelTabs,
 } from "@/shared/components/PixelComponents";
@@ -53,7 +53,7 @@ export function CoordAccountsPage() {
         <div style={{ overflowX: "auto" }}>
           <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "'JetBrains Mono', monospace" }}>
             <thead>
-              <tr style={{ background: "linear-gradient(90deg, #0d1117, #0a1020)", borderBottom: `1px solid ${C.border}` }}>
+              <tr style={{ background: C.surface2, borderBottom: `1px solid ${C.border}` }}>
                 {["Full Name", "Email", "Role", "Student Type", "Student ID", "University", "Applied", "Actions"].map(h => (
                   <th key={h} style={{ color: C.green, fontSize: 10, letterSpacing: "0.12em", textAlign: "left", padding: "12px 14px", fontWeight: 600, textTransform: "uppercase" }}>
                     {h}
@@ -69,7 +69,7 @@ export function CoordAccountsPage() {
                 const u = users.find(uu => uu.user_id === a.user_id);
                 if (!u) return null;
                 return (
-                  <tr key={a.approval_id} style={{ borderBottom: `1px solid rgba(34,197,94,0.06)`, background: i % 2 === 0 ? C.surface : "rgba(10,12,15,0.5)" }}>
+                  <tr key={a.approval_id} style={{ borderBottom: `1px solid rgba(34,197,94,0.06)`, background: i % 2 === 0 ? C.surface : C.surface2 }}>
                     <td style={{ color: C.text, fontSize: 12, padding: "12px 14px" }}>{u.full_name}</td>
                     <td style={{ color: C.textMuted, fontSize: 11, padding: "12px 14px" }}>{u.email}</td>
                     <td style={{ padding: "12px 14px" }}><PixelBadge color="blue">{u.role.replace("_", " ")}</PixelBadge></td>

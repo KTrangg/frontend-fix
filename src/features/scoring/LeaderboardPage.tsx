@@ -61,7 +61,7 @@ export function LeaderboardPage() {
           <div style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "'JetBrains Mono', monospace" }}>
               <thead>
-                <tr style={{ background: "linear-gradient(90deg, #0d1117, #0a1020)", borderBottom: `1px solid ${C.border}` }}>
+                <tr style={{ background: C.surface2, borderBottom: `1px solid ${C.border}` }}>
                   {["Rank", "Team", "Track", "Total Score", "Status"].map(h => (
                     <th key={h} style={{ color: C.green, fontSize: 10, letterSpacing: "0.12em", textAlign: "left", padding: "14px 16px", fontWeight: 600, textTransform: "uppercase" }}>{h}</th>
                   ))}
@@ -76,7 +76,7 @@ export function LeaderboardPage() {
                   return (
                     <tr key={r.ranking_id} style={{
                       borderBottom: `1px solid rgba(34,197,94,0.06)`,
-                      background: isMyTeam ? "rgba(34,197,94,0.12)" : i % 2 === 0 ? C.surface : "rgba(10,12,15,0.5)",
+                      background: isMyTeam ? "rgba(34,197,94,0.12)" : i % 2 === 0 ? C.surface : C.surface2,
                       boxShadow: isMyTeam ? `inset 3px 0 0 ${C.green}` : "none",
                     }}>
                       <td style={{ color: C.cyan, fontSize: 16, fontWeight: 700, padding: "14px 16px" }}>#{r.position}</td>

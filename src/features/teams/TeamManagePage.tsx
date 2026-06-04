@@ -14,9 +14,9 @@ import {
 const inputStyle: React.CSSProperties = {
   width: "100%",
   padding: "10px 14px",
-  background: "#1a1a24",
-  border: "1px solid #2a2a3a",
-  color: "#e2e8f0",
+  background: C.surface2,
+  border: `1px solid ${C.border}`,
+  color: C.text,
   fontFamily: "'JetBrains Mono', monospace",
   fontSize: 13,
   borderRadius: 0,
@@ -30,7 +30,7 @@ function onFocus(e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) {
   e.currentTarget.style.boxShadow = "0 0 0 1px rgba(34,197,94,0.35)";
 }
 function onBlur(e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) {
-  e.currentTarget.style.borderColor = "#2a2a3a";
+  e.currentTarget.style.borderColor = C.border;
   e.currentTarget.style.boxShadow = "none";
 }
 
@@ -61,9 +61,9 @@ function DeleteConfirmModal({
         transform: "translate(-50%, -50%)",
         zIndex: 401,
         width: "min(440px, calc(100vw - 32px))",
-        background: "#0d1117",
+        background: C.surface,
         border: "1px solid rgba(239,68,68,0.4)",
-        boxShadow: "0 0 40px rgba(239,68,68,0.12), 0 16px 48px rgba(0,0,0,0.7)",
+        boxShadow: "0 0 40px rgba(239,68,68,0.12), 0 16px 48px rgba(0,0,0,0.4)",
         padding: 32,
       }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg, #ef4444, transparent)" }} />
@@ -71,12 +71,12 @@ function DeleteConfirmModal({
         <div style={{ color: "#ef4444", fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.1em", marginBottom: 12 }}>
           // confirm_delete
         </div>
-        <h2 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 20, fontWeight: 800, color: "#e2e8f0", marginBottom: 12, lineHeight: 1.2 }}>
+        <h2 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 20, fontWeight: 800, color: C.text, marginBottom: 12, lineHeight: 1.2 }}>
           Delete Team?
         </h2>
         <p style={{ color: C.textMuted, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, lineHeight: 1.8, marginBottom: 24 }}>
           You are about to permanently delete{" "}
-          <span style={{ color: "#e2e8f0", fontWeight: 700 }}>"{teamName}"</span>.
+          <span style={{ color: C.text, fontWeight: 700 }}>"{teamName}"</span>.
           This action cannot be undone and all team members will be removed.
         </p>
 
@@ -150,7 +150,7 @@ function EditTeamForm({
             onBlur={onBlur}
           >
             {availableTracks.map(t => (
-              <option key={t.track_id} value={t.track_id} style={{ background: "#1a1a24" }}>
+              <option key={t.track_id} value={t.track_id} style={{ background: C.surface2 }}>
                 {t.track_name}
               </option>
             ))}
@@ -208,7 +208,7 @@ export function TeamManagePage() {
           <div style={{ color: "#ef4444", fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.1em", marginBottom: 12 }}>
             // team_deleted
           </div>
-          <h2 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 22, fontWeight: 800, color: "#e2e8f0", marginBottom: 12 }}>
+          <h2 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 22, fontWeight: 800, color: C.text, marginBottom: 12 }}>
             Team Deleted
           </h2>
           <p style={{ color: C.textMuted, fontFamily: "'JetBrains Mono', monospace", fontSize: 12, lineHeight: 1.8, marginBottom: 24 }}>
@@ -365,7 +365,7 @@ export function TeamManagePage() {
         <div style={{ overflowX: "auto" }}>
           <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "'JetBrains Mono', monospace" }}>
             <thead>
-              <tr style={{ background: "linear-gradient(90deg, #0d1117, #0a1020)", borderBottom: `1px solid ${C.border}` }}>
+              <tr style={{ background: C.surface2, borderBottom: `1px solid ${C.border}` }}>
                 {["Full Name", "Email", "Student Type", "Role", "Actions"].map(h => (
                   <th key={h} style={{ color: C.green, fontSize: 10, letterSpacing: "0.12em", textAlign: "left", padding: "12px 16px", fontWeight: 600, textTransform: "uppercase" }}>
                     {h}
@@ -378,7 +378,7 @@ export function TeamManagePage() {
                 const user = users.find(u => u.user_id === m.user_id);
                 if (!user) return null;
                 return (
-                  <tr key={m.user_id} style={{ borderBottom: `1px solid rgba(34,197,94,0.06)`, background: i % 2 === 0 ? C.surface : "rgba(10,12,15,0.5)" }}>
+                  <tr key={m.user_id} style={{ borderBottom: `1px solid rgba(34,197,94,0.06)`, background: i % 2 === 0 ? C.surface : C.surface2 }}>
                     <td style={{ color: C.text, fontSize: 13, padding: "12px 16px" }}>{user.full_name}</td>
                     <td style={{ color: C.textMuted, fontSize: 12, padding: "12px 16px" }}>{user.email}</td>
                     <td style={{ padding: "12px 16px" }}>

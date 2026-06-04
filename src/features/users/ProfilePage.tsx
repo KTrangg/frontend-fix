@@ -102,8 +102,8 @@ export function ProfilePage() {
   const inputStyle: React.CSSProperties = {
     width: "100%",
     padding: "10px 14px",
-    background: "#1a1a24",
-    border: "1px solid #2a2a3a",
+    background: C.surface2,
+    border: `1px solid ${C.border}`,
     color: C.text,
     fontFamily: "'JetBrains Mono', monospace",
     fontSize: 13,
@@ -118,7 +118,7 @@ export function ProfilePage() {
     e.currentTarget.style.boxShadow = "0 0 0 1px rgba(34,197,94,0.35)";
   }
   function onBlur(e: React.FocusEvent<HTMLInputElement>) {
-    e.currentTarget.style.borderColor = "#2a2a3a";
+    e.currentTarget.style.borderColor = C.border;
     e.currentTarget.style.boxShadow = "none";
   }
 
@@ -237,7 +237,7 @@ export function ProfilePage() {
                     style={{
                       ...inputStyle,
                       paddingRight: 40,
-                      borderColor: confirmPwd && newPwd && confirmPwd !== newPwd ? "rgba(239,68,68,0.6)" : "#2a2a3a",
+                      borderColor: confirmPwd && newPwd && confirmPwd !== newPwd ? "rgba(239,68,68,0.6)" : C.border,
                     }}
                     onFocus={onFocus}
                     onBlur={onBlur}
@@ -262,7 +262,7 @@ export function ProfilePage() {
                         flex: 1,
                         background: newPwd.length >= threshold
                           ? i === 0 ? "#ef4444" : i === 1 ? "#eab308" : C.green
-                          : "rgba(255,255,255,0.08)",
+                          : C.surface3,
                         transition: "background 0.2s",
                       }}
                     />

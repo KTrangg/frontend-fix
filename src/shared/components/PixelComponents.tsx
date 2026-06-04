@@ -12,7 +12,7 @@ export const C = {
   green:         "#22c55e",
   greenBright:   "#4ade80",
   greenDim:      "#16a34a",
-  greenMuted:    "#86efac",
+  greenMuted:    "var(--c-text-muted)",
   greenGlow:     "rgba(34,197,94,0.3)",
   greenGlowFaint:"rgba(34,197,94,0.1)",
 
@@ -423,7 +423,7 @@ export function PixelProgress({ value, max = 100, label, color = C.green, showVa
           {showValue && <span style={{ color: C.green, fontSize: 11, fontFamily: "'JetBrains Mono', monospace" }}>{value}/{max}</span>}
         </div>
       )}
-      <div style={{ height: 5, background: "rgba(255,255,255,0.05)", borderRadius: 0, overflow: "hidden", border: `1px solid ${C.border}` }}>
+      <div style={{ height: 5, background: C.surface3, borderRadius: 0, overflow: "hidden", border: `1px solid ${C.border}` }}>
         <div style={{ height: "100%", width: `${pct}%`, background: fill, boxShadow: `0 0 6px ${color}`, transition: "width 0.8s ease" }} />
       </div>
     </div>
@@ -548,7 +548,7 @@ export function PixelTable<T extends Record<string, unknown>>({ columns, data, c
       <div style={{ overflowX: "auto" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ background: "linear-gradient(90deg, #0d1117, #0a1020)", borderBottom: `1px solid ${C.border}` }}>
+            <tr style={{ background: C.surface2, borderBottom: `1px solid ${C.border}` }}>
               {columns.map((col) => (
                 <th key={String(col.key)} style={{ color: C.green, fontSize: 10, letterSpacing: "0.12em", textAlign: "left", padding: "10px 16px", fontWeight: 600, width: col.width, textTransform: "uppercase" }}>
                   {col.header}
@@ -558,7 +558,7 @@ export function PixelTable<T extends Record<string, unknown>>({ columns, data, c
           </thead>
           <tbody>
             {data.map((row, i) => (
-              <tr key={i} style={{ borderBottom: `1px solid rgba(34,197,94,0.06)`, background: i % 2 === 0 ? C.surface : "rgba(10,12,15,0.5)" }}
+              <tr key={i} style={{ borderBottom: `1px solid rgba(34,197,94,0.06)`, background: i % 2 === 0 ? C.surface : C.surface2 }}
                 className="hover:bg-[rgba(34,197,94,0.03)] transition-colors">
                 {columns.map((col) => (
                   <td key={String(col.key)} style={{ color: C.text, fontFamily: "'JetBrains Mono', monospace", fontSize: 13, padding: "10px 16px" }}>

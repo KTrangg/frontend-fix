@@ -267,7 +267,7 @@ export function DashboardHome({ navigate }: { navigate: (page: Page) => void }) 
                     <span style={{ color: C.textMuted }}>{m.label}</span>
                     <span style={{ color: m.color, fontWeight: 700 }}>{m.value}</span>
                   </div>
-                  <div style={{ height: 3, background: "rgba(255,255,255,0.05)", borderRadius: 0, overflow: "hidden" }}>
+                  <div style={{ height: 3, background: C.surface3, borderRadius: 0, overflow: "hidden" }}>
                     <div style={{ width: `${m.bar}%`, height: "100%", background: m.color, boxShadow: `0 0 4px ${m.color}`, transition: "width 1s" }} />
                   </div>
                 </div>

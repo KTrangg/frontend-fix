@@ -1,4 +1,4 @@
-import { useAuth } from "@/app/providers/AuthProvider";
+﻿import { useAuth } from "@/app/providers/AuthProvider";
 import {
   C, GradientText, PixelCard, PixelBadge,
 } from "@/shared/components/PixelComponents";
@@ -56,7 +56,7 @@ export function JudgeHistoryPage() {
         <div style={{ overflowX: "auto" }}>
           <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: "'JetBrains Mono', monospace" }}>
             <thead>
-              <tr style={{ background: "linear-gradient(90deg, #0d1117, #0a1020)", borderBottom: `1px solid ${C.border}` }}>
+              <tr style={{ background: C.surface2, borderBottom: `1px solid ${C.border}` }}>
                 {["Team", "Round", "Event", "Total Score", "Scored At", "Status"].map(h => (
                   <th key={h} style={{ color: C.green, fontSize: 10, letterSpacing: "0.12em", textAlign: "left", padding: "12px 16px", fontWeight: 600, textTransform: "uppercase" }}>
                     {h}
@@ -69,7 +69,7 @@ export function JudgeHistoryPage() {
                 <tr><td colSpan={6} style={{ padding: 20, color: C.textMuted, fontSize: 12, textAlign: "center" }}>No scoring history yet.</td></tr>
               )}
               {rows.map((r, i) => (
-                <tr key={r.subId} style={{ borderBottom: `1px solid rgba(34,197,94,0.06)`, background: i % 2 === 0 ? C.surface : "rgba(10,12,15,0.5)" }}>
+                <tr key={r.subId} style={{ borderBottom: `1px solid rgba(34,197,94,0.06)`, background: i % 2 === 0 ? C.surface : C.surface2 }}>
                   <td style={{ color: C.text, fontSize: 13, padding: "12px 16px" }}>{r.team?.team_name}</td>
                   <td style={{ color: C.textMuted, fontSize: 12, padding: "12px 16px" }}>{r.round?.round_name}</td>
                   <td style={{ color: C.textMuted, fontSize: 12, padding: "12px 16px" }}>{r.event?.event_name}</td>
