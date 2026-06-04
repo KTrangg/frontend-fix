@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useForceDark } from "@/app/providers/ThemeProvider";
 import { useNavigate } from "react-router";
 import {
   C, GradientText, PixelButton, PixelInput, FloatingParticles, TerminalWindow,
@@ -9,6 +10,7 @@ import { SocialAuthButtons } from "@/features/auth/SocialAuthButtons";
 import sealLogo from "@/imports/image.png";
 
 export function LoginPage() {
+  useForceDark();
   const navigate = useNavigate();
   const { login } = useAuth();
   const [email, setEmail] = useState("");

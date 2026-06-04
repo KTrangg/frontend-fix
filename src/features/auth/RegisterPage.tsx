@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useForceDark } from "@/app/providers/ThemeProvider";
 import { useNavigate } from "react-router";
 import {
   C, GradientText, PixelButton, PixelInput, PixelCard, FloatingParticles,
@@ -10,6 +11,7 @@ import sealLogo from "@/imports/image.png";
 type StudentType = 'FPT' | 'EXTERNAL';
 
 export function RegisterPage() {
+  useForceDark();
   const navigate = useNavigate();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -127,13 +129,21 @@ export function RegisterPage() {
           </form>
         </PixelCard>
 
-        <div style={{ marginTop: 24, textAlign: "center" }}>
+        <div style={{ marginTop: 24, textAlign: "center", display: "flex", flexDirection: "column", gap: 12 }}>
           <span style={{ color: C.textMuted, fontFamily: "'JetBrains Mono', monospace", fontSize: 11 }}>
             ALREADY HAVE AN ACCOUNT?{" "}
             <a onClick={() => navigate('/login')} style={{ color: C.green, cursor: "pointer", letterSpacing: "0.06em" }}>
               LOGIN
             </a>
           </span>
+          <a
+            onClick={() => navigate('/')}
+            style={{ color: C.textMuted, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, cursor: "pointer", letterSpacing: "0.1em", transition: "color 0.15s" }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = C.green; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = C.textMuted; }}
+          >
+            ← BACK TO HOME
+          </a>
         </div>
       </div>
     </div>

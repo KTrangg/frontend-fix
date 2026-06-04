@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useForceDark } from "@/app/providers/ThemeProvider";
 import { useNavigate } from "react-router";
 import {
   C, GradientText, PixelButton, PixelCard, PixelBadge,
@@ -7,8 +8,15 @@ import {
 import { useAuth } from "@/app/providers/AuthProvider";
 import { SealFooter } from "@/shared/components/SealFooter";
 import sealLogo from "@/imports/image.png";
+import Hero from "@/imports/Hero.jpg"
+import G1 from "@/imports/Hackathon.jpg";
+import G2 from "@/imports/Hackathon2.jpg";
+import G3 from "@/imports/Hackathon3.jpg";
+import G4 from "@/imports/Hackathon4.jpg";
+import G5 from "@/imports/Hackathon5.jpg";
+import G6 from "@/imports/Hackathon6.jpg";
 
-type Page = "landing" | "auth" | "dashboard" | "events" | "teams" | "submissions" | "leaderboard" | "judge" | "admin" | "profile";
+type Page = "landing" | "auth" | "register" | "dashboard" | "events" | "teams" | "submissions" | "leaderboard" | "judge" | "admin" | "profile";
 
 const sponsors = [
   { name: "TechCorp", tier: "platinum" },
@@ -28,6 +36,7 @@ const ongoingEvents = [
     deadline: "Submission deadline: Jun 17, 23:59 UTC",
     teams: 120,
     status: "active" as const,
+    banner: "",
   },
   {
     name: "Spring Sprint",
@@ -36,6 +45,7 @@ const ongoingEvents = [
     deadline: "Judging in progress",
     teams: 54,
     status: "judging" as const,
+    banner: ","
   },
 ];
 
@@ -114,22 +124,22 @@ const NAV_LINKS = [
   { label: "FAQ",      href: "#faq" },
 ];
 
-function ImagePlaceholder({ label, dataPlaceholder, width, height }: {
+function ImagePlaceholder({ label, dataPlaceholder, width, height, src = "" }: {
   label: string;
   dataPlaceholder: string;
   width?: string | number;
   height: string | number;
+  src?: string;
 }) {
-  const imgSrc = "";
   return (
     <div style={{ width: width ?? "100%", height, position: "relative", flexShrink: 0 }}>
       <img
-        src={imgSrc}
+        src={src}
         data-placeholder={dataPlaceholder}
         alt={label}
-        style={{ display: imgSrc ? "block" : "none", width: "100%", height: "100%", objectFit: "cover" }}
+        style={{ display: src ? "block" : "none", width: "100%", height: "100%", objectFit: "cover" }}
       />
-      {!imgSrc && (
+      {!src && (
         <div style={{
           position: "absolute", inset: 0,
           background: C.surface,
@@ -207,7 +217,7 @@ function NavBar({ navigate }: { navigate: (p: Page) => void }) {
           ) : (
             <>
               <PixelButton variant="ghost" size="sm" onClick={() => navigate("auth")}>Login</PixelButton>
-              <PixelButton variant="cyber" size="sm" onClick={() => navigate("auth")}>Register</PixelButton>
+              <PixelButton variant="cyber" size="sm" onClick={() => navigate("register")}>Register</PixelButton>
             </>
           )}
         </div>
@@ -232,7 +242,7 @@ function NavBar({ navigate }: { navigate: (p: Page) => void }) {
             ) : (
               <>
                 <PixelButton variant="ghost" size="sm" onClick={() => navigate("auth")}>Login</PixelButton>
-                <PixelButton variant="cyber" size="sm" onClick={() => navigate("auth")}>Register</PixelButton>
+                <PixelButton variant="cyber" size="sm" onClick={() => navigate("register")}>Register</PixelButton>
               </>
             )}
           </div>
@@ -329,7 +339,7 @@ function HeroSection({ navigate }: { navigate: (p: Page) => void }) {
         <div className="hidden md:flex flex-col gap-4 relative">
           <CircuitLines className="absolute -top-8 -right-8 w-full max-w-sm" />
 
-          <ImagePlaceholder label="[ HERO BANNER IMAGE ]" dataPlaceholder="hero-banner" height={220} />
+          <ImagePlaceholder label="[ HERO BANNER IMAGE ]" dataPlaceholder="hero-banner" height={220} src={Hero}/>
 
           <TerminalWindow title="seal-hms — live-dashboard" className="pixel-float-slow relative z-10">
             <div style={{ display: "flex", flexDirection: "column", gap: 7, fontSize: 12, color: C.text }}>
@@ -475,7 +485,7 @@ function EventsSection() {
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg, ${statusColors[ev.status]}, transparent)` }} />
                   <div style={{ position: "absolute", top: 0, left: 0, width: 10, height: 10, borderTop: `2px solid ${statusColors[ev.status]}`, borderLeft: `2px solid ${statusColors[ev.status]}` }} />
                   <div style={{ marginBottom: 16 }}>
-                    <ImagePlaceholder label="[ EVENT BANNER IMAGE ]" dataPlaceholder={`event-banner-${ev.name.toLowerCase().replace(/\s+/g, '-')}`} height={120} />
+                    <ImagePlaceholder label="[ EVENT BANNER IMAGE ]" dataPlaceholder={`event-banner-${ev.name.toLowerCase().replace(/\s+/g, '-')}`} height={120} src="https://chiikawa-merch.com/cdn/shop/articles/Chiikawa_cute_photo.jpg?v=1745683306&width=1100" />
                   </div>
                   <div className="flex items-start justify-between gap-4 mb-3">
                     <div style={{ color: C.text, fontFamily: "'JetBrains Mono', monospace", fontSize: 15, fontWeight: 700 }}>{ev.name}</div>
@@ -735,26 +745,262 @@ function TimelineSection() {
   );
 }
 
+const GALLERY = [
+  { src: G1, idx: "01", borderColor: "#22c55e" },
+  { src: G2, idx: "02", borderColor: "#3b82f6" },
+  { src: G3, idx: "03", borderColor: "#06b6d4" },
+  { src: G4, idx: "04", borderColor: "#3b82f6" },
+  { src: G5, idx: "05", borderColor: "#22c55e" },
+  { src: G6, idx: "06", borderColor: "#06b6d4" },
+];
+
+function GalleryPhoto({ src, idx, gridColumn, gridRow, borderColor = C.green, hovered, onMouseEnter, onMouseLeave, onClick }: {
+  src: string; idx: string; gridColumn?: string; gridRow?: string;
+  borderColor?: string; hovered: boolean; onMouseEnter: () => void; onMouseLeave: () => void; onClick: () => void;
+}) {
+  return (
+    <div
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onClick={onClick}
+      style={{
+        gridColumn, gridRow, position: "relative", overflow: "hidden", cursor: "zoom-in",
+        border: `1px solid ${hovered ? `${borderColor}88` : `${borderColor}28`}`,
+        boxShadow: hovered
+          ? `0 0 0 1px ${borderColor}22, 0 0 24px ${borderColor}44, 0 0 60px ${borderColor}18, inset 0 0 30px rgba(0,0,0,0.4)`
+          : `0 0 12px ${borderColor}0a, inset 0 0 20px rgba(0,0,0,0.35)`,
+        transition: "border-color 0.3s, box-shadow 0.3s",
+      }}
+    >
+      <img src={src} alt={`Gallery ${idx}`} style={{
+        width: "100%", height: "100%", objectFit: "cover", display: "block",
+        transition: "transform 0.5s ease, filter 0.3s ease",
+        transform: hovered ? "scale(1.06)" : "scale(1)",
+        filter: hovered ? "brightness(1.08) contrast(1.05)" : "brightness(0.88) contrast(1)",
+      }} />
+
+      {/* Scanline overlay */}
+      <div style={{ position: "absolute", inset: 0, background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.05) 2px, rgba(0,0,0,0.05) 3px)", pointerEvents: "none", zIndex: 1 }} />
+
+      {/* Gradient vignette */}
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 45%)", pointerEvents: "none", zIndex: 2 }} />
+
+      {/* Hover colour wash */}
+      <div style={{
+        position: "absolute", inset: 0, pointerEvents: "none", zIndex: 3,
+        background: hovered ? `linear-gradient(135deg, ${borderColor}14 0%, transparent 60%)` : "transparent",
+        transition: "background 0.3s",
+      }} />
+
+      {/* Top edge neon line */}
+      <div style={{
+        position: "absolute", top: 0, left: 0, right: 0, height: 2, zIndex: 4,
+        background: `linear-gradient(90deg, transparent, ${borderColor}, transparent)`,
+        opacity: hovered ? 1 : 0.25,
+        boxShadow: hovered ? `0 0 10px ${borderColor}, 0 0 20px ${borderColor}88` : "none",
+        transition: "opacity 0.3s, box-shadow 0.3s",
+      }} />
+
+      {/* Bottom edge neon line */}
+      <div style={{
+        position: "absolute", bottom: 0, left: 0, right: 0, height: 1, zIndex: 4,
+        background: `linear-gradient(90deg, transparent, ${borderColor}66, transparent)`,
+        opacity: hovered ? 0.8 : 0.12,
+        transition: "opacity 0.3s",
+      }} />
+
+      {/* Index tag */}
+      <div style={{
+        position: "absolute", bottom: 10, right: 12, zIndex: 5,
+        color: hovered ? borderColor : "rgba(255,255,255,0.22)",
+        fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: "0.14em",
+        textShadow: hovered ? `0 0 8px ${borderColor}, 0 0 16px ${borderColor}88` : "none",
+        transition: "color 0.3s, text-shadow 0.3s",
+      }}>
+        /{idx}
+      </div>
+
+      {/* Corner brackets */}
+      <div style={{ position: "absolute", top: 7, left: 7, width: 16, height: 16, zIndex: 5,
+        borderTop: `2px solid ${hovered ? borderColor : `${borderColor}44`}`,
+        borderLeft: `2px solid ${hovered ? borderColor : `${borderColor}44`}`,
+        boxShadow: hovered ? `inset 2px 2px 6px ${borderColor}33` : "none",
+        transition: "border-color 0.3s, box-shadow 0.3s" }} />
+      <div style={{ position: "absolute", top: 7, right: 7, width: 16, height: 16, zIndex: 5,
+        borderTop: `2px solid ${hovered ? borderColor : `${borderColor}44`}`,
+        borderRight: `2px solid ${hovered ? borderColor : `${borderColor}44`}`,
+        transition: "border-color 0.3s" }} />
+      <div style={{ position: "absolute", bottom: 7, left: 7, width: 16, height: 16, zIndex: 5,
+        borderBottom: `2px solid ${hovered ? borderColor : `${borderColor}44`}`,
+        borderLeft: `2px solid ${hovered ? borderColor : `${borderColor}44`}`,
+        transition: "border-color 0.3s" }} />
+      <div style={{ position: "absolute", bottom: 7, right: 7, width: 16, height: 16, zIndex: 5,
+        borderBottom: `2px solid ${hovered ? borderColor : `${borderColor}44`}`,
+        borderRight: `2px solid ${hovered ? borderColor : `${borderColor}44`}`,
+        boxShadow: hovered ? `inset -2px -2px 6px ${borderColor}33` : "none",
+        transition: "border-color 0.3s, box-shadow 0.3s" }} />
+    </div>
+  );
+}
+
 function GallerySection() {
-  const photos = [
-    { label: "[ PHOTO 01 ]", placeholder: "gallery-photo-01" },
-    { label: "[ PHOTO 02 ]", placeholder: "gallery-photo-02" },
-    { label: "[ PHOTO 03 ]", placeholder: "gallery-photo-03" },
-    { label: "[ PHOTO 04 ]", placeholder: "gallery-photo-04" },
-    { label: "[ PHOTO 05 ]", placeholder: "gallery-photo-05" },
-    { label: "[ PHOTO 06 ]", placeholder: "gallery-photo-06" },
-  ];
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const [activeIdx, setActiveIdx] = useState<number | null>(null);
+  const n = GALLERY.length;
+
+  useEffect(() => {
+    if (activeIdx === null) { document.body.style.overflow = ""; return; }
+    document.body.style.overflow = "hidden";
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape")      setActiveIdx(null);
+      if (e.key === "ArrowRight")  setActiveIdx(i => i !== null ? (i + 1) % n : null);
+      if (e.key === "ArrowLeft")   setActiveIdx(i => i !== null ? (i + n - 1) % n : null);
+    }
+    document.addEventListener("keydown", onKey);
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
+  }, [activeIdx, n]);
+
+  const h = (i: number) => ({
+    hovered: hoveredIdx === i,
+    onMouseEnter: () => setHoveredIdx(i),
+    onMouseLeave: () => setHoveredIdx(null),
+    onClick: () => setActiveIdx(i),
+  });
+
+  const navBtn = (label: string, action: () => void) => (
+    <button
+      onClick={(e) => { e.stopPropagation(); action(); }}
+      style={{
+        position: "absolute", top: "50%", transform: "translateY(-50%)",
+        ...(label === "‹" ? { left: 16 } : { right: 16 }),
+        background: "rgba(7,12,15,0.7)",
+        border: "1px solid rgba(34,197,94,0.35)",
+        color: "#22c55e",
+        width: 48, height: 48,
+        display: "flex", alignItems: "center", justifyContent: "center",
+        cursor: "pointer", fontSize: 26, lineHeight: 1,
+        fontFamily: "'JetBrains Mono', monospace",
+        transition: "all 0.18s",
+        zIndex: 10,
+      }}
+      onMouseEnter={(e) => { const el = e.currentTarget; el.style.background = "rgba(34,197,94,0.14)"; el.style.boxShadow = "0 0 18px rgba(34,197,94,0.35)"; }}
+      onMouseLeave={(e) => { const el = e.currentTarget; el.style.background = "rgba(7,12,15,0.7)"; el.style.boxShadow = "none"; }}
+    >
+      {label}
+    </button>
+  );
 
   return (
-    <section id="gallery" style={{ background: "#070b12", padding: "100px 0", borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}` }}>
-      <div style={{ maxWidth: 1160, margin: "0 auto", padding: "0 24px" }}>
+    <section id="gallery" style={{ background: "#060a10", padding: "100px 0", borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}`, position: "relative", overflow: "hidden" }}>
+      {/* Ambient glow blobs */}
+      <div style={{ position: "absolute", top: "8%",  left: "3%",  width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(34,197,94,0.05) 0%, transparent 70%)", pointerEvents: "none" }} />
+      <div style={{ position: "absolute", bottom: "5%", right: "5%", width: 420, height: 420, borderRadius: "50%", background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
+      <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: 600, height: 300, background: "radial-gradient(ellipse, rgba(6,182,212,0.03) 0%, transparent 70%)", pointerEvents: "none" }} />
+
+      <div style={{ maxWidth: 1160, margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
         <SectionHeader title="GALLERY" gradient subtitle="Past events, team moments, and ceremony highlights." />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" style={{ marginTop: 48 }}>
-          {photos.map((p) => (
-            <ImagePlaceholder key={p.placeholder} label={p.label} dataPlaceholder={p.placeholder} height={200} />
-          ))}
+
+        {/* Bento grid */}
+        <div style={{
+          marginTop: 48,
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gridTemplateRows: "220px 220px 210px",
+          gap: 8,
+          background: "rgba(34,197,94,0.03)",
+          padding: 8,
+          border: "1px solid rgba(34,197,94,0.07)",
+          boxShadow: "0 0 80px rgba(34,197,94,0.04), 0 0 40px rgba(59,130,246,0.04)",
+        }}>
+          <GalleryPhoto {...GALLERY[0]} gridColumn="1 / 3" gridRow="1 / 3" {...h(0)} />
+          <GalleryPhoto {...GALLERY[1]} gridColumn="3"     gridRow="1"     {...h(1)} />
+          <GalleryPhoto {...GALLERY[2]} gridColumn="3"     gridRow="2"     {...h(2)} />
+          <GalleryPhoto {...GALLERY[3]} gridColumn="1"     gridRow="3"     {...h(3)} />
+          <GalleryPhoto {...GALLERY[4]} gridColumn="2"     gridRow="3"     {...h(4)} />
+          <GalleryPhoto {...GALLERY[5]} gridColumn="3"     gridRow="3"     {...h(5)} />
         </div>
       </div>
+
+      {/* ── Lightbox ── */}
+      {activeIdx !== null && (
+        <div
+          onClick={() => setActiveIdx(null)}
+          style={{
+            position: "fixed", inset: 0, zIndex: 1000,
+            background: "rgba(0,0,0,0.93)",
+            backdropFilter: "blur(6px)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}
+        >
+          {/* Close button */}
+          <button
+            onClick={(e) => { e.stopPropagation(); setActiveIdx(null); }}
+            style={{
+              position: "absolute", top: 18, right: 20, zIndex: 11,
+              background: "rgba(7,12,15,0.8)",
+              border: "1px solid rgba(34,197,94,0.45)",
+              color: "#22c55e",
+              width: 44, height: 44,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              cursor: "pointer", fontSize: 22, lineHeight: 1,
+              fontFamily: "'JetBrains Mono', monospace",
+              transition: "all 0.18s",
+            }}
+            onMouseEnter={(e) => { const el = e.currentTarget; el.style.background = "rgba(34,197,94,0.16)"; el.style.boxShadow = "0 0 20px rgba(34,197,94,0.4)"; el.style.borderColor = "#22c55e"; }}
+            onMouseLeave={(e) => { const el = e.currentTarget; el.style.background = "rgba(7,12,15,0.8)"; el.style.boxShadow = "none"; el.style.borderColor = "rgba(34,197,94,0.45)"; }}
+          >
+            ×
+          </button>
+
+          {/* Prev / Next */}
+          {navBtn("‹", () => setActiveIdx(i => i !== null ? (i + n - 1) % n : null))}
+          {navBtn("›", () => setActiveIdx(i => i !== null ? (i + 1) % n : null))}
+
+          {/* Image */}
+          <img
+            src={GALLERY[activeIdx].src}
+            alt={`Gallery ${GALLERY[activeIdx].idx}`}
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              maxWidth: "88vw", maxHeight: "82vh",
+              objectFit: "contain",
+              border: `1px solid ${GALLERY[activeIdx].borderColor}55`,
+              boxShadow: `0 0 60px ${GALLERY[activeIdx].borderColor}22, 0 0 120px rgba(0,0,0,0.8)`,
+              userSelect: "none",
+              display: "block",
+            }}
+          />
+
+          {/* Dot pagination */}
+          <div style={{
+            position: "absolute", bottom: 22, left: "50%", transform: "translateX(-50%)",
+            display: "flex", alignItems: "center", gap: 8, zIndex: 11,
+          }}>
+            {GALLERY.map((g, i) => (
+              <div
+                key={i}
+                onClick={(e) => { e.stopPropagation(); setActiveIdx(i); }}
+                style={{
+                  width: i === activeIdx ? 24 : 7, height: 7,
+                  background: i === activeIdx ? GALLERY[activeIdx].borderColor : "rgba(255,255,255,0.2)",
+                  cursor: "pointer",
+                  transition: "all 0.22s",
+                  boxShadow: i === activeIdx ? `0 0 10px ${GALLERY[activeIdx].borderColor}` : "none",
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Counter */}
+          <div style={{
+            position: "absolute", top: 22, left: 20, zIndex: 11,
+            color: "rgba(134,239,172,0.5)",
+            fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.14em",
+          }}>
+            {String(activeIdx + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}
+          </div>
+        </div>
+      )}
     </section>
   );
 }
@@ -906,7 +1152,7 @@ function CTASection({ navigate }: { navigate: (p: Page) => void }) {
 
       <div style={{ position: "relative", zIndex: 1, maxWidth: 580, margin: "0 auto" }}>
         <div style={{ display: "flex", justifyContent: "center", marginBottom: 32 }}>
-          <ImagePlaceholder label="[ CTA FEATURE IMAGE ]" dataPlaceholder="cta-feature" width={280} height={280} />
+          <ImagePlaceholder label="[ CTA FEATURE IMAGE ]" dataPlaceholder="cta-feature" width={280} height={280} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVtWbafXpkylw3PYWF2l7sPfJqqSdAgP1FhQ&s" />
         </div>
         <h2 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "clamp(28px,4vw,52px)", fontWeight: 900, lineHeight: 1.15, marginBottom: 20, color: "white" }}>Boot Up Your<br /><GradientText from={C.green} to={C.blue}>Hackathon Journey</GradientText></h2>
         <p style={{ color: C.textMuted, fontFamily: "'JetBrains Mono', monospace", fontSize: 15, lineHeight: 1.8, marginBottom: 36 }}>
@@ -922,7 +1168,7 @@ function CTASection({ navigate }: { navigate: (p: Page) => void }) {
           }}
         >
           <div className="flex justify-center gap-3">
-            <PixelButton variant="cyber" size="lg" onClick={() => navigate("auth")}>GET STARTED FREE</PixelButton>
+            <PixelButton variant="cyber" size="lg" onClick={() => navigate("register")}>GET STARTED FREE</PixelButton>
             <PixelButton variant="secondary" size="lg" onClick={() => navigate("dashboard")}>EXPLORE DEMO DASHBOARD</PixelButton>
           </div>
           <p style={{ color: "rgba(134,239,172,0.4)", fontFamily: "'JetBrains Mono', monospace", fontSize: 11, marginTop: 16, letterSpacing: "0.04em" }}>
@@ -935,6 +1181,7 @@ function CTASection({ navigate }: { navigate: (p: Page) => void }) {
 }
 
 export function LandingPage({ navigate }: { navigate: (p: Page) => void }) {
+  useForceDark();
   return (
     <div style={{ background: C.bg, minHeight: "100vh" }}>
       <NavBar navigate={navigate} />

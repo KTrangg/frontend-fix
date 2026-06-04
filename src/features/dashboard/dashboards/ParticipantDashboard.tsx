@@ -66,7 +66,7 @@ function EventDetailDrawer({
       <div style={{
         position: "fixed", top: 0, right: 0, bottom: 0,
         width: "min(540px, 100vw)",
-        background: "#090d12",
+        background: C.surface,
         borderLeft: `1px solid ${C.border}`,
         zIndex: 201,
         overflowY: "auto",
@@ -84,7 +84,7 @@ function EventDetailDrawer({
           flexShrink: 0,
           position: "sticky",
           top: 0,
-          background: "#090d12",
+          background: C.surface,
           zIndex: 1,
         }}>
           <button
@@ -224,7 +224,7 @@ function EventDetailDrawer({
                         marginTop: 14,
                       }} />
                       {!isLast && (
-                        <div style={{ flex: 1, width: 2, background: "rgba(255,255,255,0.08)", minHeight: 24, marginTop: 4 }} />
+                        <div style={{ flex: 1, width: 2, background: C.border, minHeight: 24, marginTop: 4 }} />
                       )}
                     </div>
 
@@ -300,8 +300,8 @@ function CreateTeamScreen({
   const inputStyle: React.CSSProperties = {
     width: "100%",
     padding: "10px 14px",
-    background: "#1a1a24",
-    border: "1px solid #2a2a3a",
+    background: C.surface2,
+    border: `1px solid ${C.border}`,
     color: C.text,
     fontFamily: "'JetBrains Mono', monospace",
     fontSize: 13,
@@ -316,7 +316,7 @@ function CreateTeamScreen({
     e.currentTarget.style.boxShadow = `0 0 0 1px rgba(34,197,94,0.35)`;
   }
   function handleBlur(e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) {
-    e.currentTarget.style.borderColor = "#2a2a3a";
+    e.currentTarget.style.borderColor = C.border;
     e.currentTarget.style.boxShadow = "none";
   }
 
@@ -395,9 +395,9 @@ function CreateTeamScreen({
             onFocus={handleFocus}
             onBlur={handleBlur}
           >
-            <option value="" style={{ background: "#1a1a24" }}>— Select an event —</option>
+            <option value="" style={{ background: C.surface2 }}>— Select an event —</option>
             {openEvents.map(ev => (
-              <option key={ev.event_id} value={ev.event_id} style={{ background: "#1a1a24" }}>{ev.event_name}</option>
+              <option key={ev.event_id} value={ev.event_id} style={{ background: C.surface2 }}>{ev.event_name}</option>
             ))}
           </select>
         </div>
@@ -418,9 +418,9 @@ function CreateTeamScreen({
             onFocus={handleFocus}
             onBlur={handleBlur}
           >
-            <option value="" style={{ background: "#1a1a24" }}>— Select a track —</option>
+            <option value="" style={{ background: C.surface2 }}>— Select a track —</option>
             {eventTracks.map(tr => (
-              <option key={tr.track_id} value={tr.track_id} style={{ background: "#1a1a24" }}>{tr.track_name}</option>
+              <option key={tr.track_id} value={tr.track_id} style={{ background: C.surface2 }}>{tr.track_name}</option>
             ))}
           </select>
 
@@ -485,7 +485,7 @@ function CreateTeamScreen({
           >
             CREATE TEAM
           </PixelButton>
-          <div style={{ color: "rgba(255,255,255,0.2)", fontFamily: "'JetBrains Mono', monospace", fontSize: 10, marginTop: 10, textAlign: "center", lineHeight: 1.6 }}>
+          <div style={{ color: C.textMuted, fontFamily: "'JetBrains Mono', monospace", fontSize: 10, marginTop: 10, textAlign: "center", lineHeight: 1.6, opacity: 0.65 }}>
             Your team status will be PENDING until approved by a coordinator.
           </div>
         </div>
@@ -515,7 +515,7 @@ function SuccessScreen({
           textAlign: "center",
           overflow: "hidden",
           border: "1px solid transparent",
-          background: "linear-gradient(#0d1117, #0d1117) padding-box, linear-gradient(135deg, rgba(34,197,94,0.5), rgba(59,130,246,0.4), rgba(34,197,94,0.2)) border-box",
+          background: `linear-gradient(${C.surface}, ${C.surface}) padding-box, linear-gradient(135deg, rgba(34,197,94,0.5), rgba(59,130,246,0.4), rgba(34,197,94,0.2)) border-box`,
           boxShadow: "0 0 40px rgba(34,197,94,0.12), 0 0 80px rgba(59,130,246,0.08)",
         }}>
           {/* Corner accent */}
@@ -604,7 +604,7 @@ function NoTeamDashboard({
       {/* Header hero card */}
       <div style={{
         position: "relative",
-        background: "linear-gradient(#0d1117, #0d1117) padding-box, linear-gradient(135deg, rgba(34,197,94,0.45), rgba(59,130,246,0.35), rgba(34,197,94,0.15)) border-box",
+        background: `linear-gradient(${C.surface}, ${C.surface}) padding-box, linear-gradient(135deg, rgba(34,197,94,0.45), rgba(59,130,246,0.35), rgba(34,197,94,0.15)) border-box`,
         border: "1px solid transparent",
         padding: 28,
         overflow: "hidden",

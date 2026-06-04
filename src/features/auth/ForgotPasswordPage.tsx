@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useForceDark } from "@/app/providers/ThemeProvider";
 import { useNavigate } from "react-router";
 import { C, GradientText, PixelButton, PixelInput, FloatingParticles } from "@/shared/components/PixelComponents";
 import { SealFooter } from "@/shared/components/SealFooter";
@@ -6,6 +7,7 @@ import { users } from "@/shared/mocks/mockData";
 import sealLogo from "@/imports/image.png";
 
 export function ForgotPasswordPage() {
+  useForceDark();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");

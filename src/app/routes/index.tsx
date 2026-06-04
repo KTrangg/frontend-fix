@@ -1,5 +1,6 @@
 import { createBrowserRouter, Navigate, Outlet, useLocation, useNavigate } from "react-router";
 import { useAuth } from "@/app/providers/AuthProvider";
+import { useForceDark } from "@/app/providers/ThemeProvider";
 import { DevToolbar } from "@/shared/components/DevToolbar";
 import { LandingPage } from "@/features/landing/LandingPage";
 import { LoginPage } from "@/features/auth/LoginPage";
@@ -52,12 +53,18 @@ function RootLayout() {
   );
 }
 
+function PublicLayout() {
+  useForceDark();
+  return <Outlet />;
+}
+
 function LandingPageWrapper() {
   const navigate = useNavigate();
   return (
     <LandingPage
       navigate={(page) => {
         if (page === 'auth') navigate('/login');
+        else if (page === 'register') navigate('/register');
         else if (page === 'dashboard') navigate('/dashboard');
       }}
     />
@@ -68,11 +75,16 @@ export const router = createBrowserRouter([
   {
     element: <RootLayout />,
     children: [
-  { path: "/", Component: LandingPageWrapper },
-  { path: "/login", Component: LoginPage },
-  { path: "/register", Component: RegisterPage },
-  { path: "/pending-approval", Component: PendingApprovalPage },
-  { path: "/forgot-password", Component: ForgotPasswordPage },
+  {
+    element: <PublicLayout />,
+    children: [
+      { path: "/", Component: LandingPageWrapper },
+      { path: "/login", Component: LoginPage },
+      { path: "/register", Component: RegisterPage },
+      { path: "/pending-approval", Component: PendingApprovalPage },
+      { path: "/forgot-password", Component: ForgotPasswordPage },
+    ],
+  },
   {
     element: <RequireAuth />,
     children: [

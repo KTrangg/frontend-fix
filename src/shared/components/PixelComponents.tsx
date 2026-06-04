@@ -2,58 +2,63 @@ import { useState, useEffect, useRef } from "react";
 
 // ── Color tokens ─────────────────────────────────────────────────
 export const C = {
-  // Backgrounds
-  bg:       "#070c0f",
-  surface:  "#0d1117",
-  surface2: "#111827",
-  surface3: "#1a2332",
+  // Backgrounds — theo theme (CSS variables)
+  bg:       "var(--c-bg)",
+  surface:  "var(--c-surface)",
+  surface2: "var(--c-surface2)",
+  surface3: "var(--c-surface3)",
 
-  // Green (primary)
-  green:        "#22c55e",
-  greenBright:  "#4ade80",
-  greenDim:     "#16a34a",
-  greenMuted:   "#86efac",
-  greenGlow:    "rgba(34,197,94,0.3)",
+  // Green (primary accent — cố định)
+  green:         "#22c55e",
+  greenBright:   "#4ade80",
+  greenDim:      "#16a34a",
+  greenMuted:    "#86efac",
+  greenGlow:     "rgba(34,197,94,0.3)",
   greenGlowFaint:"rgba(34,197,94,0.1)",
 
-  // Blue (secondary cyber accent)
-  blue:       "#3b82f6",
-  blueBright: "#60a5fa",
-  blueDim:    "#1d4ed8",
-  blueGlow:   "rgba(59,130,246,0.3)",
-  blueGlowFaint:"rgba(59,130,246,0.1)",
+  // Blue (secondary cyber accent — cố định)
+  blue:          "#3b82f6",
+  blueBright:    "#60a5fa",
+  blueDim:       "#1d4ed8",
+  blueGlow:      "rgba(59,130,246,0.3)",
+  blueGlowFaint: "rgba(59,130,246,0.1)",
 
-  // Cyan (innovation highlight)
+  // Cyan (innovation highlight — cố định)
   cyan:      "#06b6d4",
   cyanBright:"#22d3ee",
   cyanGlow:  "rgba(6,182,212,0.35)",
 
-  // Purple (AI / ML accent)
+  // Purple (AI / ML accent — cố định)
   purple:    "#8b5cf6",
   purpleGlow:"rgba(139,92,246,0.3)",
 
-  // Text
-  text:     "#f0fdf4",
-  textMuted:"#86efac",
-  textDim:  "#4ade80",
-  textBlue: "#93c5fd",
+  // Text — theo theme
+  text:     "var(--c-text)",
+  textMuted:"var(--c-text-muted)",
+  textDim:  "var(--c-text-dim)",
+  textBlue: "var(--c-text-blue)",
 
-  // Borders
-  border:       "rgba(34,197,94,0.2)",
-  borderBright: "#22c55e",
-  borderBlue:   "rgba(59,130,246,0.25)",
+  // Borders — theo theme
+  border:       "var(--c-border)",
+  borderBright: "var(--c-border-bright)",
+  borderBlue:   "var(--c-border-blue)",
 
-  // Status
+  // Status (cố định)
   red:    "#ef4444",
   yellow: "#eab308",
   orange: "#f97316",
 
-  // Gradients (for inline use)
-  gradientPrimary:  "linear-gradient(135deg, #22c55e 0%, #3b82f6 100%)",
-  gradientCyber:    "linear-gradient(135deg, #0d1117 0%, #0a1628 100%)",
-  gradientCard:     "linear-gradient(135deg, rgba(34,197,94,0.06) 0%, rgba(59,130,246,0.04) 100%)",
-  gradientHero:     "linear-gradient(160deg, rgba(34,197,94,0.08) 0%, rgba(59,130,246,0.06) 50%, rgba(6,182,212,0.04) 100%)",
-} as const;
+  // Backgrounds đặc biệt — theo theme
+  navbarBg:  "var(--c-navbar-bg)",
+  footerBg:  "var(--c-footer-bg)",
+  copyright: "var(--c-copyright)",
+
+  // Gradients
+  gradientPrimary: "linear-gradient(135deg, #22c55e 0%, #3b82f6 100%)",
+  gradientCyber:   "linear-gradient(135deg, var(--c-surface) 0%, var(--c-surface2) 100%)",
+  gradientCard:    "linear-gradient(135deg, rgba(34,197,94,0.06) 0%, rgba(59,130,246,0.04) 100%)",
+  gradientHero:    "linear-gradient(160deg, rgba(34,197,94,0.08) 0%, rgba(59,130,246,0.06) 50%, rgba(6,182,212,0.04) 100%)",
+};
 
 // ── Gradient text helper ─────────────────────────────────────────
 interface GradientTextProps {
