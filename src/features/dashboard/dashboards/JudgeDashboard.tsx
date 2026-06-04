@@ -13,12 +13,15 @@ function fmtDate(iso: string) {
 
 export function JudgeDashboard() {
   const navigate = useNavigate();
-  const { currentUser } = useAuth();
+  const { currentUser, currentEvent } = useAuth();
   if (!currentUser) return null;
 
   const myAssignments = judgeAssignments.filter(j => j.judge_id === currentUser.user_id);
   const myRoundIds = myAssignments.map(a => a.round_id);
-  const myRounds = rounds.filter(r => myRoundIds.includes(r.round_id));
+  const allMyRounds = rounds.filter(r => myRoundIds.includes(r.round_id));
+  const myRounds = currentEvent
+    ? allMyRounds.filter(r => r.event_id === currentEvent.event_id)
+    : allMyRounds;
 
   // For each round, count submissions vs scored
   const roundStats = myRounds.map(round => {

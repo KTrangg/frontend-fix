@@ -131,7 +131,7 @@ export function LoginPage() {
               </div>
 
               <PixelButton type="submit" variant="cyber" size="lg" fullWidth>
-                INITIALIZE SESSION
+                LOGIN
               </PixelButton>
 
               <SocialAuthButtons />

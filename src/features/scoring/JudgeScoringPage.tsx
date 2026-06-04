@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useAuth } from "@/app/providers/AuthProvider";
 import {
   C, GradientText, PixelCard, PixelButton, PixelBadge, PixelInput,
@@ -19,10 +19,13 @@ interface ScoreInput {
 }
 
 export function JudgeScoringPage() {
-  const { currentUser } = useAuth();
+  const { currentUser, currentEvent } = useAuth();
   const myAssignments = currentUser ? judgeAssignments.filter(j => j.judge_id === currentUser.user_id) : [];
   const myRoundIds = myAssignments.map(a => a.round_id);
-  const myRounds = rounds.filter(r => myRoundIds.includes(r.round_id));
+  const allMyRounds = rounds.filter(r => myRoundIds.includes(r.round_id));
+  const myRounds = currentEvent
+    ? allMyRounds.filter(r => r.event_id === currentEvent.event_id)
+    : allMyRounds;
 
   const [selectedRoundId, setSelectedRoundId] = useState<number | null>(myRounds[0]?.round_id ?? null);
   const [selectedSubId, setSelectedSubId] = useState<number | null>(null);
@@ -30,6 +33,13 @@ export function JudgeScoringPage() {
   const [scoreInputs, setScoreInputs] = useState<Record<number, ScoreInput>>({});
   const [scoreState] = useState(initialScores);
   const [submittedMsg, setSubmittedMsg] = useState<string | null>(null);
+
+  useEffect(() => {
+    setSelectedRoundId(myRounds[0]?.round_id ?? null);
+    setSelectedSubId(null);
+    setScoreInputs({});
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentEvent?.event_id]);
 
   if (!currentUser) return null;
 

@@ -11,7 +11,7 @@ function fmtDateTime(iso: string) {
 }
 
 export function JudgeHistoryPage() {
-  const { currentUser } = useAuth();
+  const { currentUser, currentEvent } = useAuth();
   if (!currentUser) return null;
 
   // Group scores by submission for this judge
@@ -22,7 +22,7 @@ export function JudgeHistoryPage() {
     mySubScores.set(s.submission_id, arr);
   });
 
-  const rows = Array.from(mySubScores.entries()).map(([subId, sScores]) => {
+  const allRows = Array.from(mySubScores.entries()).map(([subId, sScores]) => {
     const sub = submissions.find(s => s.submission_id === subId);
     const team = sub ? teams.find(t => t.team_id === sub.team_id) : null;
     const round = sub ? rounds.find(r => r.round_id === sub.round_id) : null;
@@ -43,6 +43,10 @@ export function JudgeHistoryPage() {
 
     return { subId, team, round, event, totalScore, isDraft, scoredAt };
   });
+
+  const rows = currentEvent
+    ? allRows.filter(r => r.event?.event_id === currentEvent.event_id)
+    : allRows;
 
   return (
     <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 20 }}>

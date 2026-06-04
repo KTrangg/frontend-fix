@@ -318,8 +318,8 @@ function HeroSection({ navigate }: { navigate: (p: Page) => void }) {
           </p>
 
           <div className="flex flex-wrap gap-3">
-            <PixelButton variant="cyber" size="lg" onClick={() => navigate("auth")}>LAUNCH CONSOLE</PixelButton>
-            <PixelButton variant="secondary" size="lg" onClick={() => navigate("dashboard")}>VIEW DEMO</PixelButton>
+            <PixelButton variant="cyber" size="lg" onClick={() => navigate("auth")}>GET STARTED FREE</PixelButton>
+            <PixelButton variant="secondary" size="lg" onClick={() => navigate("register")}>EVENT REGISTRATION</PixelButton>
           </div>
 
           <div style={{ display: "flex", gap: 28, flexWrap: "wrap", marginTop: 4 }}>
@@ -1170,7 +1170,7 @@ function CTASection({ navigate }: { navigate: (p: Page) => void }) {
         >
           <div className="flex justify-center gap-3">
             <PixelButton variant="cyber" size="lg" onClick={() => navigate("register")}>GET STARTED FREE</PixelButton>
-            <PixelButton variant="secondary" size="lg" onClick={() => navigate("dashboard")}>EXPLORE DEMO DASHBOARD</PixelButton>
+            <PixelButton variant="secondary" size="lg" onClick={() => navigate("register")}>EVENT REGISTRATION</PixelButton>
           </div>
           <p style={{ color: "rgba(134,239,172,0.4)", fontFamily: "'JetBrains Mono', monospace", fontSize: 11, marginTop: 16, letterSpacing: "0.04em" }}>
             No credit card required · Free forever · Open source
