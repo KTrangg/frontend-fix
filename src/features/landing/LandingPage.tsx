@@ -75,7 +75,7 @@ const upcomingEvents = [
 ];
 
 const faqs = [
-  { q: "Who can participate?", a: "Any student or developer 18+. Teams of 1–4 members. Students, professionals, and hobbyists are all welcome." },
+  { q: "Who can participate?", a: "Any student or developer 18+. Teams of 3-5 members. Students, professionals, and hobbyists are all welcome." },
   { q: "Is it free to join?", a: "Yes — participation is completely free. All you need is a registered account on this platform." },
   { q: "What can I build?", a: "Web apps, mobile apps, AI tools, dev tools, games — anything built from scratch during the hackathon window." },
   { q: "How are projects judged?", a: "Innovation, technical depth, design quality, and real-world impact — scored by a panel of expert judges per round." },
@@ -86,7 +86,7 @@ const faqs = [
 const features = [
   {
     title: "Team Registration",
-    desc: "Form a team of up to 4, pick a track, and register in minutes. Invite members by email or share a join link.",
+    desc: "Form a team of up to 5, pick a track, and register in minutes. Invite members by email or share a join link.",
     accent: C.green,
   },
   {
