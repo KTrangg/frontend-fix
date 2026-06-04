@@ -9,6 +9,7 @@ import {
 } from "@/shared/components/PixelComponents";
 import { SealFooter } from "@/shared/components/SealFooter";
 import sealLogo from "@/imports/image.png";
+import KhanhNHL from "@/imports/KhannhNLH.jpg"
 
 const mono = "'JetBrains Mono', monospace";
 
@@ -16,13 +17,15 @@ const team = [
   {
     name: "Nguyễn Huỳnh Minh Nhật",
     role: "Lead Engineer & Architect",
+    photo: "", // ← CHÈN ẢNH TẠI ĐÂY — VD: "/src/imports/nhat.jpg"
     desc: "Designs the platform's role-based access model, scoring engine, and judge workflows. Loves clean APIs and merciless code reviews.",
     accent: C.green,
     socials: { github: "#", linkedin: "#", email: "alex@sealhackathon.com" },
   },
   {
-    name: "Nguyễn Lê Hữu Khánh",
+    name: "Nguyễn Huỳnh Khánh Trang",
     role: "Frontend & UI/UX",
+    photo: "", // ← CHÈN ẢNH TẠI ĐÂY — VD: "/src/imports/khanh.jpg"
     desc: "Owns the cyberpunk visual language and pixel-art component library. Pushes pixels until they glow exactly right.",
     accent: C.blue,
     socials: { github: "#", linkedin: "#", email: "maya@sealhackathon.com" },
@@ -30,13 +33,15 @@ const team = [
   {
     name: "Đào Hoàng Nhật",
     role: "Backend & DevOps",
+    photo: "", // ← CHÈN ẢNH TẠI ĐÂY — VD: "/src/imports/hoang.jpg"
     desc: "Keeps the leaderboard live, the submissions stamped, and the deploys boring. Believes in zero-downtime everything.",
     accent: C.cyan,
     socials: { github: "#", linkedin: "#", email: "jordan@sealhackathon.com" },
   },
   {
-    name: "Nguyễn Huỳnh Khánh Trang",
+    name: "Nguyễn Lê Hữu Khánh",
     role: "Frontend & UI/UX",
+    photo: KhanhNHL, // ← CHÈN ẢNH TẠI ĐÂY — VD: "/src/imports/trang.jpg"
     desc: "Owns the cyberpunk visual language and pixel-art component library. Pushes pixels until they glow exactly right.",
     accent: C.purple,
     socials: { github: "#", linkedin: "#", email: "sam@sealhackathon.com" },
@@ -89,70 +94,123 @@ export function TeamPage() {
       <section style={{ background: C.bg, padding: "60px 0 120px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
           <SectionHeader title="The Crew" gradient />
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 fade-in-section" style={{ marginTop: 48 }}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 fade-in-section" style={{ marginTop: 48 }}>
             {team.map((m) => (
               <div
                 key={m.name}
                 style={{
                   background: C.surface,
-                  border: `1px solid ${m.accent}33`,
-                  padding: 0,
+                  border: `1px solid ${m.accent}30`,
                   position: "relative",
                   overflow: "hidden",
+                  display: "flex",
+                  flexDirection: "row",
                   transition: "transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease",
-                  boxShadow: `0 0 18px ${m.accent}10`,
+                  boxShadow: `0 2px 24px rgba(0,0,0,0.35)`,
                 }}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget as HTMLElement;
-                  el.style.transform = "translateY(-4px) scale(1.01)";
-                  el.style.boxShadow = `0 0 36px ${m.accent}44, 0 12px 30px rgba(0,0,0,0.5)`;
-                  el.style.borderColor = `${m.accent}88`;
+                  el.style.transform = "translateY(-3px)";
+                  el.style.boxShadow = `0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px ${m.accent}55`;
+                  el.style.borderColor = `${m.accent}66`;
                 }}
                 onMouseLeave={(e) => {
                   const el = e.currentTarget as HTMLElement;
-                  el.style.transform = "translateY(0) scale(1)";
-                  el.style.boxShadow = `0 0 18px ${m.accent}10`;
-                  el.style.borderColor = `${m.accent}33`;
+                  el.style.transform = "translateY(0)";
+                  el.style.boxShadow = `0 2px 24px rgba(0,0,0,0.35)`;
+                  el.style.borderColor = `${m.accent}30`;
                 }}
               >
-                <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg, ${m.accent}, transparent)`, opacity: 0.7 }} />
-                <div style={{ position: "absolute", top: 0, left: 0, width: 12, height: 12, borderTop: `2px solid ${m.accent}`, borderLeft: `2px solid ${m.accent}` }} />
-                <div style={{ position: "absolute", bottom: 0, right: 0, width: 12, height: 12, borderBottom: `2px solid ${m.accent}`, borderRight: `2px solid ${m.accent}` }} />
+                {/* Accent line trên cùng */}
+                <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg, ${m.accent}cc, ${m.accent}11)` }} />
 
-                {/* Avatar placeholder */}
-                <div style={{ width: "100%", height: 200, background: `linear-gradient(135deg, ${m.accent}18, transparent 80%), ${C.bg}`, borderBottom: `1px solid ${m.accent}22`, display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
-                  <div style={{
-                    width: 96, height: 96, borderRadius: "50%",
-                    background: `radial-gradient(circle, ${m.accent}44, ${m.accent}11)`,
-                    border: `2px solid ${m.accent}66`,
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    color: m.accent, fontFamily: mono, fontSize: 28, fontWeight: 800,
-                    textShadow: `0 0 16px ${m.accent}`,
-                    boxShadow: `0 0 24px ${m.accent}55`,
-                  }}>
-                    {m.name.split(" ").map((n) => n[0]).join("")}
-                  </div>
-                  <div style={{ position: "absolute", bottom: 8, right: 12, color: C.textMuted, fontFamily: mono, fontSize: 9, letterSpacing: "0.12em" }}>
-                    → drop image here
-                  </div>
+                {/* ── Cột ảnh bên trái ── */}
+                <div style={{
+                  width: 130, minWidth: 130, position: "relative",
+                  background: `linear-gradient(160deg, ${m.accent}18 0%, ${C.bg} 100%)`,
+                  borderRight: `1px solid ${m.accent}20`,
+                  flexShrink: 0, overflow: "hidden",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                }}>
+                  {m.photo ? (
+                    <>
+                      <img
+                        src={m.photo}
+                        alt={m.name}
+                        style={{
+                          width: "100%", height: "100%",
+                          objectFit: "cover", objectPosition: "center top",
+                          display: "block",
+                        }}
+                      />
+                      {/* gradient mờ sang phải để blend với content */}
+                      <div style={{
+                        position: "absolute", inset: 0,
+                        background: `linear-gradient(to right, transparent 60%, ${C.surface} 100%)`,
+                      }} />
+                      {/* scanline nhẹ */}
+                      <div style={{
+                        position: "absolute", inset: 0,
+                        backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.06) 3px, rgba(0,0,0,0.06) 4px)",
+                        pointerEvents: "none",
+                      }} />
+                    </>
+                  ) : (
+                    /* Fallback initials */
+                    <span style={{
+                      color: m.accent, fontFamily: mono, fontSize: 40, fontWeight: 900,
+                      opacity: 0.3, letterSpacing: "-0.03em", userSelect: "none",
+                      textShadow: `0 0 30px ${m.accent}`,
+                    }}>
+                      {m.name.split(" ").slice(-2).map((n) => n[0]).join("")}
+                    </span>
+                  )}
+
+                  {/* Góc bracket trên trái */}
+                  <div style={{ position: "absolute", top: 7, left: 7, width: 12, height: 12, borderTop: `2px solid ${m.accent}99`, borderLeft: `2px solid ${m.accent}99` }} />
+                  {/* Góc bracket dưới trái */}
+                  <div style={{ position: "absolute", bottom: 7, left: 7, width: 12, height: 12, borderBottom: `2px solid ${m.accent}99`, borderLeft: `2px solid ${m.accent}99` }} />
                 </div>
 
-                <div style={{ padding: 22 }}>
-                  <div style={{ color: C.text, fontFamily: mono, fontSize: 16, fontWeight: 800, marginBottom: 4 }}>{m.name}</div>
-                  <div style={{ color: m.accent, fontFamily: mono, fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 12 }}>{m.role}</div>
-                  <div style={{ color: C.textMuted, fontFamily: mono, fontSize: 13, lineHeight: 1.7, marginBottom: 16 }}>{m.desc}</div>
-                  <div style={{ display: "flex", gap: 10 }}>
+                {/* ── Cột nội dung bên phải ── */}
+                <div style={{ flex: 1, padding: "18px 18px 16px", display: "flex", flexDirection: "column", justifyContent: "space-between", minWidth: 0 }}>
+                  <div>
+                    {/* Role badge */}
+                    <div style={{
+                      display: "inline-block",
+                      background: `${m.accent}15`,
+                      border: `1px solid ${m.accent}40`,
+                      padding: "2px 8px", marginBottom: 8,
+                    }}>
+                      <span style={{ color: m.accent, fontFamily: mono, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase" }}>
+                        {m.role}
+                      </span>
+                    </div>
+
+                    {/* Tên */}
+                    <div style={{ color: C.text, fontFamily: mono, fontSize: 14, fontWeight: 800, marginBottom: 8, lineHeight: 1.3 }}>
+                      {m.name}
+                    </div>
+
+                    {/* Mô tả */}
+                    <div style={{ color: C.textMuted, fontFamily: mono, fontSize: 11, lineHeight: 1.7, marginBottom: 14 }}>
+                      {m.desc}
+                    </div>
+                  </div>
+
+                  {/* Socials */}
+                  <div style={{ display: "flex", gap: 8 }}>
                     {[
-                      { icon: Github, href: m.socials.github, label: "GitHub" },
-                      { icon: Linkedin, href: m.socials.linkedin, label: "LinkedIn" },
-                      { icon: Mail, href: `mailto:${m.socials.email}`, label: "Email" },
+                      { icon: Github,   href: m.socials.github,            label: "GitHub" },
+                      { icon: Linkedin, href: m.socials.linkedin,          label: "LinkedIn" },
+                      { icon: Mail,     href: `mailto:${m.socials.email}`, label: "Email" },
                     ].map(({ icon: Icon, href, label }) => (
                       <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
-                        style={{ width: 32, height: 32, display: "flex", alignItems: "center", justifyContent: "center", border: `1px solid ${C.border}`, color: C.textMuted, transition: "all 0.15s" }}
-                        onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.color = m.accent; el.style.borderColor = m.accent; el.style.boxShadow = `0 0 12px ${m.accent}66`; }}
-                        onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.color = C.textMuted; el.style.borderColor = C.border; el.style.boxShadow = "none"; }}
+                        style={{ width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center", border: `1px solid ${C.border}`, color: C.textMuted, transition: "all 0.15s" }}
+                        onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.color = m.accent; el.style.borderColor = `${m.accent}88`; el.style.background = `${m.accent}10`; }}
+                        onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.color = C.textMuted; el.style.borderColor = C.border; el.style.background = "transparent"; }}
                       >
-                        <Icon size={15} />
+                        <Icon size={13} />
                       </a>
                     ))}
                   </div>
