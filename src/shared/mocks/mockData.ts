@@ -379,6 +379,55 @@ export const notifications: AppNotification[] = [
   { notification_id: 13, user_id: 4, type: 'info', title: 'New Track Assignments', message: 'You have been assigned to mentor Blockchain & Web3 and Mobile Applications tracks in SEAL Summer 2026.', is_read: false, created_at: '2026-06-15T11:00:00' },
 ];
 
+export interface TeamInvite {
+  invite_id: number;
+  team_id: number;
+  invited_user_id: number;
+  invited_by: number;
+  message: string;
+  created_at: string;
+  status: 'PENDING' | 'ACCEPTED' | 'DECLINED';
+}
+
+export const teamInvites: TeamInvite[] = [
+  {
+    invite_id: 1,
+    team_id: 1,
+    invited_user_id: 18,
+    invited_by: 2,
+    message: "Hey! We need a frontend dev for the Qualifier round. Want to join StackTrace?",
+    created_at: '2026-05-23T09:00:00',
+    status: 'PENDING',
+  },
+  {
+    invite_id: 2,
+    team_id: 3,
+    invited_user_id: 18,
+    invited_by: 6,
+    message: "CodeCraft is looking for passionate builders. We think you'd be a great fit!",
+    created_at: '2026-05-24T14:30:00',
+    status: 'PENDING',
+  },
+  {
+    invite_id: 3,
+    team_id: 7,
+    invited_user_id: 18,
+    invited_by: 9,
+    message: "We're building a cloud-native infra project for Summer 2026. Join CloudBuilders!",
+    created_at: '2026-05-25T11:00:00',
+    status: 'PENDING',
+  },
+  {
+    invite_id: 4,
+    team_id: 4,
+    invited_user_id: 18,
+    invited_by: 6,
+    message: "NullPointers needs one more member before we get approved. Come join us!",
+    created_at: '2026-05-26T08:45:00',
+    status: 'PENDING',
+  },
+];
+
 export const MOCK_CREDENTIALS: Record<string, number> = {
   'coordinator@seal.edu': 1,
   'leader@seal.edu': 2,

@@ -76,7 +76,6 @@ export function SealFooter() {
         padding: "64px 24px 28px",
         width: "100%",
         position: "relative",
-        overflow: "hidden",
       }}
     >
       {/* Top neon accent line */}
@@ -141,6 +140,7 @@ export function SealFooter() {
                   backgroundClip: "text",
                   textShadow: "0 0 28px rgba(34,197,94,0.3)",
                   whiteSpace: "nowrap",
+                  width: "max-content",
                 }}
               >
                 SEAL HACKATHON
