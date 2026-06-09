@@ -7,12 +7,15 @@ import {
 import { SealFooter } from "@/shared/components/SealFooter";
 import { SocialAuthButtons } from "@/features/auth/SocialAuthButtons";
 import sealLogo from "@/imports/image.png";
+import { apiFetch, ApiError } from "@/shared/apiClient";
+import { useNotifications } from "@/app/providers/NotificationProvider";
 
 type StudentType = 'FPT' | 'EXTERNAL';
 
 export function RegisterPage() {
   useForceDark();
   const navigate = useNavigate();
+  const { addAuthToast } = useNotifications();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,8 +24,9 @@ export function RegisterPage() {
   const [studentId, setStudentId] = useState("");
   const [university, setUniversity] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
     if (!fullName || !email || !password) {
@@ -33,7 +37,34 @@ export function RegisterPage() {
       setError("Passwords do not match");
       return;
     }
-    navigate('/pending-approval');
+    setSubmitting(true);
+    try {
+      await apiFetch('/api/auth/register', {
+        method: 'POST',
+        body: JSON.stringify({
+          fullName,
+          email,
+          password,
+          userType: studentType === 'FPT' ? 'FPT_STUDENT' : 'EXTERNAL_STUDENT',
+          studentId: studentId || null,
+          university: studentType === 'EXTERNAL' ? (university || null) : null,
+        }),
+      });
+      addAuthToast({ type: 'success', title: 'REGISTRATION SUBMITTED', message: 'Your account is pending coordinator approval.' });
+      navigate('/pending-approval');
+    } catch (err) {
+      if (err instanceof ApiError) {
+        if (err.status === 409) {
+          setError("An account with this email already exists.");
+        } else {
+          setError(err.message || "Registration failed. Please try again.");
+        }
+      } else {
+        setError("Network error. Please check your connection and try again.");
+      }
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -121,8 +152,8 @@ export function RegisterPage() {
               </div>
             )}
 
-            <PixelButton type="submit" variant="cyber" size="lg" fullWidth>
-              SUBMIT REGISTRATION
+            <PixelButton type="submit" variant="cyber" size="lg" fullWidth disabled={submitting}>
+              {submitting ? "SUBMITTING..." : "SUBMIT REGISTRATION"}
             </PixelButton>
 
             <SocialAuthButtons />
